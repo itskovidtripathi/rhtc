@@ -1,0 +1,93 @@
+RARE & HARD TO TREAT CANCERS (RHTC) - USE CASE DOCUMENTATION
+
+ACTORS:
+
+1. Patient/User
+- Primary consumer of information
+- No authentication required
+- Read-only access to all public content
+
+2. Administrator
+- Content manager
+- Requires authentication
+- Full access to content management
+
+USE CASES:
+
+1. Patient/User Actions:
+a) View Cancer Information
+   - Access cancer guidelines
+   - View treatment protocols
+   - Download documentation
+   - Browse FAQs
+   - Read patient stories
+
+b) Access Support Resources
+   - View financial aid options
+   - Browse government schemes
+   - Find cancer centers
+   - Access educational materials
+
+c) Use Interactive Features
+   - Use AI prediction tool
+   - Search cancer centers
+   - Filter content by cancer type
+   - Navigate treatment guidelines
+
+2. Administrator Actions:
+a) Content Management
+   - Add/Edit cancer guidelines
+   - Update treatment protocols
+   - Manage FAQs
+   - Upload documents
+   - Update patient stories
+
+b) System Management
+   - Manage user accounts
+   - Monitor system usage
+   - Update website content
+   - Maintain documentation
+
+RELATIONSHIPS:
+
+1. Include Relationships:
+- Content viewing (included in all user actions)
+- Content validation (included in all admin actions)
+- Access control (included in all admin actions)
+
+2. Extend Relationships:
+- Advanced search extends basic search
+- Detailed view extends basic view
+- Admin edit extends admin view
+
+CONSTRAINTS:
+
+1. User Constraints:
+- Read-only access
+- No authentication required
+- Public content only
+- Download restrictions
+
+2. Admin Constraints:
+- Requires secure login
+- Audit trail of changes
+- Content approval workflow
+- Access level restrictions
+
+SCENARIOS:
+
+1. User Journey:
+- Browse cancer information
+- Access guidelines
+- View support options
+- Use interactive tools
+- Download resources
+
+2. Admin Journey:
+- Login to system
+- Update content
+- Manage resources
+- Monitor usage
+- Generate reports
+
+This use case diagram focuses on the two primary actors and their interactions with the RHTC system, emphasizing the clear separation between information consumers (patients/users) and information managers (administrators).

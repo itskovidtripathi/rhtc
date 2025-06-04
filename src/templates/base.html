@@ -41,6 +41,7 @@
             <li class="nav-item">
                 <a class='nav-title' href="{% url 'core:home' %}">Home</a>
             </li>
+
             
             <li class="nav-item has-dropdown">
                 <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'cancer-dropdown', this)">
@@ -49,7 +50,7 @@
                         <ul class="dropdown-list">
                             <li><a class='dropdown-item' href="{% url 'core:about' %}">History</a></li>
                             <!-- <li><a class='dropdown-item' href="{% url 'core:profile' %}">Profile</a></li> -->
-                            <li><a class='dropdown-item' href="{% url 'questions:category' %}">FAQs</a></li>
+                            <!-- <li><a class='dropdown-item' href="{% url 'questions:category' %}">FAQs</a></li> -->
                             <!-- <li><a class='dropdown-item' href="{% url 'core:board' %}">Administration</a></li> -->
                         </ul>
                     </div>
@@ -81,7 +82,9 @@
                     </div>
                 </div>
             </li>
-
+            <li class="nav-item">
+                <a class='nav-title' href="{% url 'questions:category' %}">FAQs</a>
+            </li>
             <li class="nav-item has-dropdown">
                 <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'external-dropdown')">
                     <span class="nav-title">External Links<span class="arrow">▼</span></span>

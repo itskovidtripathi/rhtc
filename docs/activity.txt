@@ -1,0 +1,98 @@
+RARE & HARD TO TREAT CANCERS (RHTC) - ACTIVITY DIAGRAM DOCUMENTATION
+
+1. USER INFORMATION ACCESS FLOW
+Start
+├── Enter Website
+├── Browse Content
+│   ├── View Cancer Guidelines
+│   ├── Access Support Resources 
+│   └── Read FAQs
+└── End
+
+2. CANCER GUIDELINES WORKFLOW
+Start
+├── Select Cancer Type
+│   ├── Lung Cancer
+│   ├── Breast Cancer
+│   └── Oral Cancer
+├── Choose Language
+│   ├── English
+│   └── Hindi
+├── View Guidelines
+└── End
+
+3. FAQ SYSTEM WORKFLOW
+Start
+├── Select Question Category
+│   ├── Risk Assessment
+│   ├── Insurance
+│   ├── Screening
+│   ├── Test Results
+│   └── Biopsies
+├── View Questions
+├── View Answers
+└── End
+
+4. ADMIN CONTENT MANAGEMENT FLOW
+Start
+├── Admin Login
+├── Authentication
+├── Choose Action
+│   ├── Update Guidelines
+│   │   ├── Select Cancer Type
+│   │   ├── Edit Content
+│   │   └── Save Changes
+│   ├── Manage FAQs
+│   │   ├── Add/Edit Questions
+│   │   ├── Update Answers
+│   │   └── Save Changes
+│   └── Upload Resources
+└── End
+
+DECISION POINTS:
+
+1. User Access
+- No authentication required
+- Direct access to all content
+- Language selection option
+
+2. Content Display
+- Cancer type selection
+- Category selection for FAQs
+- Resource type selection
+
+3. Admin Actions
+- Authentication required
+- Content validation
+- Change confirmation
+
+PARALLEL ACTIVITIES:
+
+1. Content Access
+- Multiple users can access content simultaneously
+- Different language versions available concurrently
+- Multiple categories accessible in parallel
+
+2. Admin Management
+- Content updates
+- FAQ management
+- Resource uploads
+
+NOTES:
+
+1. System States
+- Content viewing state
+- Admin editing state
+- Resource access state
+
+2. Activity Transitions
+- Smooth navigation between sections
+- Clear return paths
+- Consistent user flow
+
+3. Error Handling
+- Invalid access attempts
+- Content not found
+- Upload failures
+
+This documentation provides the foundation for creating a comprehensive activity diagram showing the flow of activities and decisions in the RHTC system.
