@@ -13,7 +13,7 @@ A comprehensive platform for information and support related to rare and hard-to
 
 1. **Clone the Repository**
 ```bash
-git clone <repository-url>
+git clone https://github.com/itskovidtripathi/rhtc.git
 cd "Rare & Hard to Treat Cancers"
 ```
 
