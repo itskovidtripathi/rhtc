@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Tailored Information - RHTC{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %}
+    {% block content %}
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="{% url 'tailored_info:options' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Options
+        </a>
+    </div>
+
+    <section class="stage-selection">
+        <h2 class="services-title">Support for Rare & Hard to Treat Cancers</h2>
+        <div class="stage-cards-container">
+            <!-- Cancer Centers Card -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h3>Cancer Centers for Rare & Hard to Treat Cancer</h3>
+                <p>Find specialized cancer treatment centers and experts dedicated to rare and complex cancer cases across India.</p>
+                <a href="https://cancer.ktripathi.site/CancerCareLocator/" class="stage-btn">View Centers</a>
+            </div>
+
+            <!-- NGOs Card -->
+            <div class="stage-card during-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-hands-helping"></i>
+                </div>
+                <h3>NGOs for Rare & Hard to Treat Cancers</h3>
+                <p>Connect with organizations providing support, resources, and assistance for patients with rare cancer types.</p>
+                <a href="#" class="stage-btn">Find NGOs</a>
+            </div>
+
+            <!-- Community Forum Card -->
+            <div class="stage-card after-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Special Community Forum</h3>
+                <p>
+                    Join our dedicated community forum for patients and families dealing with rare and hard to treat cancers.
+                </p>
+                <a href="#" class="stage-btn">Join Community</a>
+            </div>
+
+            <!-- Supporters Card -->
+            <div class="stage-card after-stage2">
+                <div class="stage-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Financial Support</h3>
+                <p>
+                    Learn about financial assistance programs and funding support available through ICPC for cancer patients.
+                </p>
+                <a href="{% url 'tailored_info:supporters' %}" class="stage-btn">View Support</a>
+            </div>
+
+            <!-- Screening Card -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-microscope"></i>
+                </div>
+                <h3>Cancer Screening</h3>
+                <p>
+                    Learn about regular screening tests, early detection methods, and recommended screening schedules for different cancer types.
+                </p>
+                <a href="#" class="stage-btn">View Screening Info</a>
+            </div>
+
+            <!-- Risk Assessment Card -->
+            <div class="stage-card during-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Risk Assessment</h3>
+                <p>
+                    Understand your cancer risk factors through our comprehensive assessment tools and personalized recommendations.
+                </p>
+                <a href="#" class="stage-btn">Start Assessment</a>
+            </div>
+
+            <!-- Questions to Ask Card -->
+            <div class="stage-card after-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3>Questions to Ask</h3>
+                <p>
+                    Important questions to ask your healthcare team about diagnosis, treatment options, and care management.
+                </p>
+                <a href="{% url 'questions:category' %}" class="stage-btn">View Questions</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="esr-hero">
+        <div class="esr-hero-content">
+            <h1 class="esr-title">"Together We Are Stronger"</h1>
+            <p class="esr-subtitle">
+                Specialized support and resources for rare and hard to treat cancer cases
+            </p>
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>

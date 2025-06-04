@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Early Stage Recognition - RHTC{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="esr-hero">
+    <div class="esr-hero-content">
+        <h1 class="esr-title">Early Stage Recognition</h1>
+        <p class="esr-subtitle">Understanding cancer at different stages can lead to better outcomes</p>
+    </div>
+</section>
+
+<!-- Stage Selection Section -->
+<section class="stage-selection">
+    <h2 class="section-title">Select Stage</h2>
+    <div class="stage-cards-container">
+        <!-- Early Stage Card -->
+        <div class="stage-card early-stage">
+            <div class="stage-icon">
+                <i class="fas fa-search-plus"></i>
+            </div>
+            <h3>Early Stage</h3>
+            <p>Learn about early detection methods, symptoms to watch for, and preventive measures.</p>
+            <a href="{% url 'tailored_info:early_stage' %}" class="stage-btn">See Patients</a>
+        </div>
+
+        <!-- During Stage Card -->
+        <div class="stage-card during-stage">
+            <div class="stage-icon">
+                <i class="fas fa-procedures"></i>
+            </div>
+            <h3>During Treatment</h3>
+            <p>Understand treatment options, managing side effects, and maintaining quality of life.</p>
+            <a href="{% url 'tailored_info:during_stage' %}" class="stage-btn">See Patients</a>
+        </div>
+
+        <!-- After Treatment Card -->
+        <div class="stage-card after-stage">
+            <div class="stage-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <h3>After Treatment</h3>
+            <p>Guidance on recovery, follow-up care, and returning to normal life after treatment.</p>
+            <a href="{% url 'tailored_info:after_stage' %}" class="stage-btn">See Patients</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.querySelectorAll('.stage-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const link = this.querySelector('a').href;
+            window.location.href = link;
+        });
+    });
+</script>
+{% endblock %}

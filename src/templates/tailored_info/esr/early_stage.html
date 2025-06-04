@@ -1,0 +1,350 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Early Stage Recognition - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Added styles for the patient cards section */
+    .patient-cards-section {
+        margin: 2rem 0;
+    }
+    
+    .section-intro {
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    
+    .patient-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    
+    .patient-card {
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    
+    .patient-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .patient-title {
+      color: #1a5276;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .patient-title i {
+      color: #3498db;
+    }
+    
+    .patient-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    
+    .patient-details {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    
+    .patient-details li {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+    
+    .patient-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+    
+    .patient-status {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    .status-active {
+      background-color: #e8f5e9;
+      color: #27ae60;
+    }
+    
+    .status-monitoring {
+      background-color: #fff3e0;
+      color: #f39c12;
+    }
+    
+    .btn-details {
+      background-color: #3498db;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: background-color 0.3s;
+    }
+    
+    .btn-details:hover {
+      background-color: #2980b9;
+    }
+    
+    /* Key Takeaways section */
+    .key-takeaways {
+      background-color: #f8f9fa;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+    }
+    
+    .key-takeaways h2 {
+      color: #1a5276;
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .takeaways-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    .takeaway-card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    .takeaway-card i {
+      font-size: 2rem;
+      color: #3498db;
+      margin-bottom: 1rem;
+    }
+    
+    .takeaway-card h3 {
+      color: #1a5276;
+      margin-bottom: 0.5rem;
+    }
+    
+    .takeaway-card p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+<main class="esr-main">
+    <!-- Hero Section -->
+    <section class="esr-hero">
+        <div class="esr-hero-content">
+            <h1 class="esr-title">Early Stage Recognition</h1>
+            <p class="esr-subtitle">Understanding cancer at different stages can lead to better outcomes</p>
+        </div>
+    </section>
+
+    <!-- Patient Cases Section -->
+    <section class="patient-cards-section">
+        <div class="container">
+            <div class="section-intro">
+                <h2>Patient Case Studies</h2>
+                <p>These are real case studies (names changed) of patients who were diagnosed at early stages of cancer.</p>
+            </div>
+
+            <div class="patient-cards-container">
+              <!-- Patient 1 -->
+              <div class="patient-card">
+                <div class="patient-header">
+                  <h2 class="patient-title">
+                    <i class="fas fa-user"></i>
+                    Patient Case 1: Sarah M.
+                  </h2>
+                  <p class="patient-description">45-year-old non-smoker</p>
+                </div>
+                <div class="patient-content">
+                  <ul class="patient-details">
+                    <li>Stage: IA</li>
+                    <li>Pattern: Small Nodule</li>
+                    <li>Size: 1.2 cm</li>
+                    <li>Location: Right upper lobe</li>
+                  </ul>
+                </div>
+                <div class="patient-footer">
+                  <span class="patient-status status-active">
+                    <i class="fas fa-check-circle"></i>
+                    Early Stage
+                  </span>
+                  <a href="#" class="btn-details">
+                    View Details
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+    
+              <!-- Patient 2 -->
+              <div class="patient-card">
+                <div class="patient-header">
+                  <h2 class="patient-title">
+                    <i class="fas fa-user"></i>
+                    Patient Case 2: James R.
+                  </h2>
+                  <p class="patient-description">52-year-old former smoker</p>
+                </div>
+                <div class="patient-content">
+                  <ul class="patient-details">
+                    <li>Stage: IA1</li>
+                    <li>Pattern: Ground-Glass</li>
+                    <li>Size: 2.5 cm</li>
+                    <li>Location: Left lower lobe</li>
+                  </ul>
+                </div>
+                <div class="patient-footer">
+                  <span class="patient-status status-monitoring">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Early Stage
+                  </span>
+                  <a href="#" class="btn-details">
+                    View Details
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+    
+              <!-- Patient 3 -->
+              <div class="patient-card">
+                <div class="patient-header">
+                  <h2 class="patient-title">
+                    <i class="fas fa-user"></i>
+                    Patient Case 3: Maria L.
+                  </h2>
+                  <p class="patient-description">38-year-old</p>
+                </div>
+                <div class="patient-content">
+                  <ul class="patient-details">
+                    <li>Stage: IB</li>
+                    <li>Pattern: Multiple Nodules</li>
+                    <li>Count: 3 (0.5-0.8 cm)</li>
+                    <li>Location: Bilateral</li>
+                  </ul>
+                </div>
+                <div class="patient-footer">
+                  <span class="patient-status status-active">
+                    <i class="fas fa-check-circle"></i>
+                    Early Stage
+                  </span>
+                  <a href="#" class="btn-details">
+                    View Details
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+    
+              <!-- Patient 4 -->
+              <div class="patient-card">
+                <div class="patient-header">
+                  <h2 class="patient-title">
+                    <i class="fas fa-user"></i>
+                    Patient Case 4: Robert K.
+                  </h2>
+                  <p class="patient-description">60-year-old</p>
+                </div>
+                <div class="patient-content">
+                  <ul class="patient-details">
+                    <li>Stage: IA2</li>
+                    <li>Pattern: Airway Wall</li>
+                    <li>Location: Right bronchus</li>
+                    <li>Type: Squamous cell</li>
+                  </ul>
+                </div>
+                <div class="patient-footer">
+                  <span class="patient-status status-monitoring">
+                    <i class="fas fa-exclamation-circle"></i>
+                    Early Stage
+                  </span>
+                  <a href="#" class="btn-details">
+                    View Details
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+    
+              <!-- Patient 5 -->
+              <div class="patient-card">
+                <div class="patient-header">
+                  <h2 class="patient-title">
+                    <i class="fas fa-user"></i>
+                    Patient Case 5: Emily T.
+                  </h2>
+                  <p class="patient-description">49-year-old</p>
+                </div>
+                <div class="patient-content">
+                  <ul class="patient-details">
+                    <li>Stage: IB</li>
+                    <li>Pattern: Mixed Density</li>
+                    <li>Size: 2.8 cm</li>
+                    <li>Location: Left upper lobe</li>
+                  </ul>
+                </div>
+                <div class="patient-footer">
+                  <span class="patient-status status-active">
+                    <i class="fas fa-check-circle"></i>
+                    Early Stage
+                  </span>
+                  <a href="#" class="btn-details">
+                    View Details
+                    <i class="fas fa-arrow-right"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Takeaways Section -->
+    <section class="key-takeaways">
+        <div class="container">
+            <h2><i class="fas fa-lightbulb"></i> Key Takeaways from Early Detection</h2>
+            <div class="takeaways-container">
+                <div class="takeaway-card">
+                    <i class="fas fa-search"></i>
+                    <h3>Regular Screening</h3>
+                    <p>All these cases were detected through routine screening before symptoms appeared.</p>
+                </div>
+                <div class="takeaway-card">
+                    <i class="fas fa-procedures"></i>
+                    <h3>Less Aggressive Treatment</h3>
+                    <p>Early detection often means less extensive treatment with fewer side effects.</p>
+                </div>
+                <div class="takeaway-card">
+                    <i class="fas fa-heartbeat"></i>
+                    <h3>Better Outcomes</h3>
+                    <p>Survival rates are significantly higher when cancer is caught at early stages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

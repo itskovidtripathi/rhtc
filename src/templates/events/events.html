@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Events - RHTC{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- Events Page Content -->
+<div class="container">
+    
+    <section class="events-description fade-in">
+        <h2><i class="fas fa-globe-americas"></i> International Cancer Conferences</h2>
+        <p>RHTC organizes forward-looking conferences across the globe to bridge implementation gaps in cancer care. These
+            events bring together policymakers, healthcare professionals, researchers, and advocates to foster collaboration
+            and address region-specific challenges.</p>
+    </section>
+
+    <!-- Section: Why It Matters -->
+    <section class="why-it-matters fade-in">
+        <h3><i class="fas fa-heartbeat"></i>Why it matters</h3>
+        <p>These conferences drive regional solutions and global collaboration, integrating innovations like digital
+            pathology and advanced diagnostics into healthcare systems.</p>
+    </section>
+
+    <!-- Section: Get Involved -->
+    <section class="get-involved fade-in">
+        <h3><i class="fas fa-hands-helping"></i> Get involved</h3>
+        <p>Attend our events, present your findings, or sponsor regional initiatives to advance cancer care.</p>
+    </section>
+
+    <!-- Section: Upcoming Events -->
+    <section class="events-section">
+        <h3>Upcoming events</h3>
+        <div class="event-cards">
+            <!-- Event Card 1 -->
+            <div class="event-card">
+                <img src="{% static 'images/event1.jpg' %}" alt="Unity in Action">
+                <h4>Unity in Action: MENA–EU Partnership</h4>
+                <p>Rome, Italy - April 15, 2025</p>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card">
+                <img src="{% static 'images/event2.jpg' %}" alt="ESMO Congress">
+                <h4>ESMO Congress</h4>
+                <p>Berlin, Germany - October 2025</p>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card">
+                <img src="{% static 'images/event3.jpg' %}" alt="AOS 2025">
+                <h4>AOS 2025</h4>
+                <p>Seoul, South Korea - July 2025</p>
+            </div>
+
+            <!-- Event Card 4 -->
+            <div class="event-card">
+                <img src="{% static 'images/event4.jpg' %}" alt="Twelfth EDCTP Forum">
+                <h4>Twelfth EDCTP Forum</h4>
+                <p>Kigali, Rwanda - June 2025</p>
+            </div>
+
+            <!-- Event Card 5 -->
+            <div class="event-card">
+                <img src="{% static 'images/event5.jpg' %}" alt="MEP meeting">
+                <h4>MEP meeting</h4>
+                <p>Brussels, Belgium - March 2025</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Previous Events -->
+    <section class="events-section">
+        <h3>Previous events</h3>
+        <div class="event-cards">
+            <!-- Event Card 1 -->
+            <div class="event-card">
+                <img src="{% static 'images/event6.jpg' %}" alt="Kumbh Mela">
+                <h4>Kumbh Mela: High-Level Political Summit</h4>
+                <p>Prayagraj, India - February 20-21, 2025</p>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card">
+                <img src="{% static 'images/event7.jpg' %}" alt="BGICC">
+                <h4>BGICC</h4>
+                <p>Cairo, Egypt - January 23-24, 2025</p>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card">
+                <img src="{% static 'images/event8.jpg' %}" alt="4th International Congress of the Asian Oncology Society">
+                <h4>4th International Congress of the Asian Oncology Society</h4>
+                <p>Xi’an, China - November 14-17, 2024</p>
+            </div>
+
+            <!-- Event Card 4 -->
+            <div class="event-card">
+                <img src="{% static 'images/event9.jpg' %}" alt="The White House Global Cancer Fund Discussion">
+                <h4>The White House Global Cancer Fund Discussion</h4>
+                <p>Washington, DC, USA - October 25, 2024</p>
+            </div>
+
+            <!-- Event Card 5 -->
+            <div class="event-card">
+                <img src="{% static 'images/event10.jpg' %}" alt="ICPC Launches at UN Headquarters">
+                <h4>ICPC Launches at UN Headquarters</h4>
+                <p>New York City, USA - September 25, 2024</p>
+            </div>
+
+            <!-- Event Card 6 -->
+            <div class="event-card">
+                <img src="{% static 'images/event11.jpg' %}" alt="Global Cancer Experts Convene in Geneva">
+                <h4>Global Cancer Experts Convene in Geneva</h4>
+                <p>Geneva, Switzerland - September 19, 2024</p>
+            </div>
+
+            <!-- Event Card 7 -->
+            <div class="event-card">
+                <img src="{% static 'images/event12.jpg' %}" alt="Healthcare Innovation Summit in Barcelona">
+                <h4>Healthcare Innovation Summit in Barcelona</h4>
+                <p>Barcelona, Spain - September 15, 2024</p>
+            </div>
+        </div>
+    </section>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Reveal elements on scroll
+    const faders = document.querySelectorAll('.fade-in');
+
+    const appearOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    };
+
+    const appearOnScroll = new IntersectionObserver(function (entries, observer) {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+        });
+    }, appearOptions);
+
+    faders.forEach(fader => {
+        appearOnScroll.observe(fader);
+    });
+</script>
+{% endblock %}

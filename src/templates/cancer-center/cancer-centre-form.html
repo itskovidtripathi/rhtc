@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lung Cancer Prediction System</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+  <!-- Chatbot Button Top Right -->
+  <div class="chatbot-container">
+    <button class="chatbot-btn" onclick="toggleChat()">
+      <i class="fas fa-robot"></i>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <h3>Cancer Support Chatbot</h3>
+        <button class="close-chat" onclick="toggleChat()">&times;</button>
+      </div>
+      <div class="chat-body" id="chatBody">
+        <!-- Chat messages will appear here -->
+        <div class="chat-message bot-message">
+          Hello! I'm here to help with cancer-related information. How can I
+          assist you today?
+        </div>
+      </div>
+      <div class="chat-footer">
+        <input type="text" class="chat-input" placeholder="Type your message..." id="userInput" />
+        <button class="sent-chat" onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Human Assistant Button Bottom Right -->
+  <div class="assistant-container">
+    <button class="assistant-btn" onclick="connectToAssistant()">
+      <i class="fas fa-user-md"></i>
+    </button>
+  </div>
+
+  <!-- 🔵 HEADER SECTION -->
+  <header class="site-header">
+    <div class="header-left">
+      <a href="https://shuats.edu.in/">
+        <img src="../assets/image.png" alt="India Against Cancer" class="logo" />
+      </a>
+    </div>
+
+    <div class="header-right"></div>
+
+    <h1>Rare & Hard to Treat Cancers</h1>
+    <div class="header-right"></div>
+    <div class="header-left">
+      <a href='/'>
+        <img src="../assets/image.png" alt="India Against Cancer" class="logo" />
+      </a>
+    </div>
+    </div>
+  </header>
+
+  <!-- Back Button -->
+  <div class="back-button-container">
+    <a href="../tailored-information/tailored-info-options-details.html" class="back-button">
+      <i class="fas fa-arrow-left"></i>
+      Back to Options
+    </a>
+  </div>
+
+  <!-- 🧭 NAVIGATION BAR -->
+  <nav class="navbar">
+    <ul class="nav-list">
+      <!-- HOME -->
+      <li class="nav-item">
+        <a class='nav-title' href='/'>Home</a>
+      </li>
+
+      <!-- KNOW ABOUT CANCER -->
+      <li class="nav-item has-dropdown">
+        <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'cancer-dropdown', this)">
+          <span class="nav-title">About Us<span class="arrow">▼</span></span>
+          <div class="dropdown" id="cancer-dropdown">
+            <ul class="dropdown-list" id="cancer-options">
+              <li><a class='dropdown-item' href='/about'>History</a></li>
+              <li>
+                <a class='dropdown-item' href='/profile'>Profile</a>
+              </li>
+              <li><a class='dropdown-item' href='/faq'>FAQs</a></li>
+              <li>
+                <a class='dropdown-item' href='/board'>Administration</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- SERVICES OFFERED -->
+      <li class="nav-item has-dropdown">
+        <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'faicilities-dropdown')">
+          <span class="nav-title">Services Offered<span class="arrow">▼</span></span>
+          <div class="dropdown" id="faicilities-dropdown">
+            <ul class="dropdown-list" id="faicilities-options">
+              <a href="https://lungscan-ai.streamlit.app" class="dropdown-item">AI based Prediction</a>
+              <a class='dropdown-item' href='/esr'>Connect with experts</a>
+              <a class='dropdown-item' href='/esr'>Research & Development</a>
+              <a href="#" class="dropdown-item">Government Schemes</a>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- OTHER STATIC LINKS -->
+
+      <!-- Events -->
+      <li class="nav-item has-dropdown">
+        <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'events-dropdown', this)">
+          <span class="nav-title">Events<span class="arrow">▼</span></span>
+          <div class="dropdown" id="events-dropdown">
+            <ul class="dropdown-list" id="events-options">
+              <li>
+                <a class='dropdown-item' href='/events'>All Events</a>
+              </li>
+              <li>
+                <a class='dropdown-item' href='/gallery'>Gallery</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <!-- main website -->
+      <li class="nav-item has-dropdown">
+        <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'main-dropdown', this)">
+          <span class="nav-title">External Links<span class="arrow">▼</span></span>
+          <div class="dropdown" id="main-dropdown">
+            <ul class="dropdown-list" id="main-options">
+              <li>
+                <a class="dropdown-item" href="https://shuats.edu.in/" target="_blank">SHUATS</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://unite4cancer.com/" target="_blank">ICPC</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://www.mohfw.gov.in/" target="_blank">MOHFW</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://www.icmr.gov.in/" target="_blank">ICMR</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://dbtindia.gov.in/" target="_blank">DBT</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://dst.gov.in/" target="_blank">DST</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://www.csir.res.in/" target="_blank">CSIR</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="https://dhr.gov.in/" target="_blank">DHR</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="esr-main">
+    <section class="stage-selection">
+      <h2 class="services-title">Find Cancer Centers for Rare & Hard to Treat Cancers</h2>
+
+      <div class="stage-content">
+        <form class="location-form" id="centerSearchForm" onsubmit="handleFormSubmit(event)">
+          <!-- Country Selection -->
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" required class="form-control">
+              <option value="">Select Country</option>
+              <option value="IN">India</option>
+
+            </select>
+          </div>
+
+          <!-- State Selection -->
+          <div class="form-group">
+            <label for="state">State/Province</label>
+            <select id="state" name="state" required class="form-control">
+              <option value="">Select State</option>
+              <option value="UP">Uttar Pradesh</option>
+              <option value="BH">Bihar</option>
+            </select>
+          </div>
+
+          <!-- City Selection -->
+          <div class="form-group">
+            <label for="city">City</label>
+            <select id="city" name="city" required class="form-control">
+              <option value="">Select City</option>
+              <!-- Cities will be populated based on state selection -->
+            </select>
+          </div>
+
+          <!-- Pincode/Zipcode -->
+          <div class="form-group">
+            <label for="pincode">Pincode/Zipcode</label>
+            <input type="text" id="pincode" name="pincode" placeholder="Enter your pincode" required class="form-control">
+          </div>
+
+          <!-- Cancer Type Selection -->
+          <div class="form-group">
+            <label for="cancerType">Type of Cancer</label>
+            <select id="cancerType" name="cancerType" class="form-control" disabled style="background-color: #f8f8f8; cursor: not-allowed;">
+              <option value="">Select Cancer Type</option>
+              <option value="lung">Lung Cancer</option>
+              <option value="oral">Oral Cancer</option>
+              <option value="breast">Breast Cancer</option>
+            </select>
+            <!-- Hidden input to ensure the value is still submitted with the form -->
+            <input type="hidden" name="cancerType" id="hiddenCancerType">
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="stage-btn">Find Centers</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="esr-hero">
+      <div class="esr-hero-content">
+        <h1 class="esr-title">"Specialized Care Near You"</h1>
+        <p class="esr-subtitle">
+          Find specialized cancer treatment centers in your area
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Replace the existing CSS with these styles -->
+  <style>
+    .stage-content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .location-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-weight: 500;
+      color: #072ACB;
+      font-size: 16px;
+    }
+
+    .form-control {
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      width: 100%;
+    }
+
+    .form-control:focus {
+      border-color: #072ACB;
+      outline: none;
+      box-shadow: 0 0 0 2px rgba(7, 42, 203, 0.1);
+    }
+
+    .back-button-container {
+      padding: 20px;
+      text-align: left;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #072ACB;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .back-button:hover {
+      background-color: #0522a5;
+      transform: translateX(-5px);
+    }
+  </style>
+
+  <script src="../scripts.js"></script>
+  <script>
+    document.getElementById('state').addEventListener('change', function() {
+        const citySelect = document.getElementById('city');
+        const selectedState = this.value;
+        
+        // Clear current cities
+        citySelect.innerHTML = '<option value="">Select City</option>';
+        
+        // Define cities for each state matching JSON data
+        const stateCities = {
+            'UP': ['Prayagraj', 'Varanasi'],
+            'BH': ['Patna', 'Gaya']
+        };
+        
+        if (selectedState && stateCities[selectedState]) {
+            stateCities[selectedState].forEach(city => {
+                const option = document.createElement('option');
+                option.value = city.toLowerCase();
+                option.textContent = city;
+                citySelect.appendChild(option);
+            });
+        }
+    });
+
+    // Get cancer type from URL parameter and set both select and hidden input
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const cancerType = urlParams.get('type');
+      
+      if (cancerType) {
+        const typeSelect = document.getElementById('cancerType');
+        const hiddenInput = document.getElementById('hiddenCancerType');
+        typeSelect.value = cancerType;
+        hiddenInput.value = cancerType;
+      }
+    });
+
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const state = document.getElementById('state').value;
+      const city = document.getElementById('city').value;
+      const cancerType = document.getElementById('hiddenCancerType').value;
+      
+      window.location.href = `show-cancer-centers.html?state=${state}&city=${city}&type=${cancerType}`;
+    }
+  </script>
+</body>
+
+</html>

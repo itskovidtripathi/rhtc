@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Government Schemes - RHTC{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %}
+    {% block content %}
+    <!-- Back Button -->
+    <div class="back-button-container">
+        <a href="{% url 'tailored_info:options' %}" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+            Back to Options
+        </a>
+    </div>
+
+    <section class="stage-selection">
+        <h2 class="services-title">Government Schemes for Cancer Treatment</h2>
+        <div class="stage-cards-container">
+            <!-- Ayushman Bharat Card -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-hospital-user"></i>
+                </div>
+                <h3>Ayushman Bharat (PM-JAY)</h3>
+                <p>A flagship health insurance program providing coverage up to ₹5 lakh per family annually for cancer treatments, benefiting over 68 lakh patients nationwide.</p>
+                
+                <a href="https://nha.gov.in/PM-JAY" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- HMCPF Card -->
+            <div class="stage-card during-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-hand-holding-medical"></i>
+                </div>
+                <h3>Health Minister's CPF</h3>
+                <p>Offers financial aid up to ₹15 lakh for cancer treatment at 27 Regional Cancer Centres, specifically for below poverty line patients.</p>
+                 <a href="https://myscheme.gov.in/hmcpf" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- Haryana Scheme Card -->
+            <div class="stage-card after-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h3>Haryana Stage III & IV Support</h3>
+                <p>Monthly assistance of ₹3,000 for Stage III and IV cancer patients in Haryana with family income below ₹3 lakh annually.</p>
+                <a href="https://socialjusticehry.gov.in" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- Arunachal Pradesh Card -->
+            <div class="stage-card after-stage2">
+                <div class="stage-icon">
+                    <i class="fas fa-prescription-bottle-medical"></i>
+                </div>
+                <h3>Arunachal Free Chemotherapy</h3>
+                <p>Provides free chemotherapy up to ₹10 lakh yearly with consultation services, in partnership with TATA Memorial Hospital.</p>
+                <a href="https://myscheme.gov.in/cmfccs" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- UP CM Scheme Card -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-building-government"></i>
+                </div>
+                <h3>UP CM Financial Assistance</h3>
+                <p>State initiative providing financial aid through multiple channels including CM Helpline and Janata Darshan for cancer care support.</p>
+                <a href="https://upcmo.up.nic.in" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- Maharashtra MJPJAY Card -->
+            <div class="stage-card during-stage">
+                <div class="stage-icon">
+                    <i class="fas fa-heart-pulse"></i>
+                </div>
+                <h3>MJPJAY Maharashtra</h3>
+                <p>Healthcare scheme offering coverage up to ₹1.5 lakh annually for eligible ration card holders across Maharashtra's charitable hospitals.</p>
+                <a href="https://jeevandayee.gov.in" target="_blank" class="stage-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+</body>
+</html>

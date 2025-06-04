@@ -1,0 +1,92 @@
+{
+    "Bihar": {
+        "Patna": [
+            {
+                "name": "Mahavir Cancer Sansthan & Research Centre",
+                "address": "Phulwarisharif, Khagaul-Anisabad Road, In front of Dairy Project, Patna, Bihar \u2013 801505",
+                "phone": [
+                    "+91-612-2250127",
+                    "+91-612-2253956",
+                    "+91-612-3222583"
+                ],
+                "mobile": "+91-7091490890",
+                "email": "mcspatna98@gmail.com",
+                "website": "https://www.mahavircancersansthan.com/"
+            },
+            {
+                "name": "Buddha Cancer Centre",
+                "address": "200 meters left from Nahar Chowk, Naharpar, Bailey Road, Rupaspur, Patna, Bihar \u2013 801503",
+                "phone": [
+                    "+91-9470000258",
+                    "+91-7361877980"
+                ],
+                "email": "buddhacancer@gmail.com",
+                "website": "https://www.buddhacancer.com/"
+            }
+        ],
+        "Gaya": [
+            {
+                "name": "Anugrah Narayan Magadh Medical College & Hospital (ANMMCH)",
+                "address": "Sherghati Road, Gaya, Bihar \u2013 823001",
+                "phone": [
+                    "+91-631-2210196"
+                ],
+                "email": "princ_anmc@rediffmail.com",
+                "website": "https://anmmc.ac.in/"
+            },
+            {
+                "name": "Buddha Hospital and Research Institute",
+                "address": "Durway, Gaya-Rafiganj Road, Near FCI Godown, Gaya, Bihar \u2013 823001",
+                "phone": [
+                    "+91-9162845503",
+                    "+91-9162845504"
+                ],
+                "email": "bhrigaya@gmail.com",
+                "website": "https://bhrigaya.in/"
+            }
+        ]
+    },
+    "Uttar Pradesh": {
+        "Prayagraj": [
+            {
+                "name": "Kamla Nehru Memorial Hospital (KNMH)",
+                "address": "Kamla Nehru Road, Prayagraj, Uttar Pradesh \u2013 211002",
+                "phone": [
+                    "+91-532-2565306",
+                    "+91-532-2564792"
+                ],
+                "email": "info@knmh.in",
+                "website": "https://www.knmh.in/"
+            },
+            {
+                "name": "Jeevan Jyoti Hospital",
+                "address": "162, Chak Raghunath, Mirzapur Road, Prayagraj, Uttar Pradesh \u2013 211003",
+                "phone": [
+                    "+91-532-2456789"
+                ],
+                "email": "info@jeevanjyotihospital.com",
+                "website": "https://jeevanjyotihospital.com/"
+            }
+        ],
+        "Varanasi": [
+            {
+                "name": "Mahamana Pandit Madan Mohan Malaviya Cancer Centre (MPMMCC)",
+                "address": "Banaras Hindu University Campus, Varanasi, Uttar Pradesh \u2013 221005",
+                "phone": [
+                    "+91-542-2225074"
+                ],
+                "email": "mpmmcc@tmc.gov.in",
+                "website": "https://mpmmcc.tmc.gov.in/"
+            },
+            {
+                "name": "Homi Bhabha Cancer Hospital (HBCH)",
+                "address": "Shivpurwa, Varanasi, Uttar Pradesh \u2013 221003",
+                "phone": [
+                    "+91-542-2501234"
+                ],
+                "email": "hbchvaranasi@tmc.gov.in",
+                "website": "https://www.tatacancercarefoundation.org/where-we-work/hbch-varanasi.html"
+            }
+        ]
+    }
+}

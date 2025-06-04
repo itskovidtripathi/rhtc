@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us - RHTC{% endblock %}
+
+{% block extra_css %}
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="container" data-aos="fade-up" data-aos-delay="100">
+    <div class="text-center">
+        <img src="{% static 'images/shuatslogo.jpg' %}" alt="SHUATS Logo" class="logo" />
+        <h2 class="section-title">Sam Higginbottom University of Agriculture, Technology & Sciences</h2>
+    </div>
+
+    <div class="blue-bg mt-4">
+        <p>A Premier Institution Committed to Excellence in Education, Research, and Development</p>
+    </div>
+
+    <h3 class="section-title">History</h3>
+    <div class="history-content">
+        <p>The Sam Higginbottom University of Agriculture, Technology And Sciences (SHUATS) is established under U.P. Act
+            No. 35 of 2016, as passed by the Uttar Pradesh Legislature. SHUATS is established and administered by the
+            Ecumenical Minority Christian Society namely the Sam Higginbottom Educational and Charitable Society registered
+            under the Society Registration Act, 1860 in the State of Uttar Pradesh.</p>
+        
+        <h4>Timeline</h4>
+        <ul class="timeline">
+            <li>1910 - Dr. Sam Higginbottom established Allahabad Agricultural Institute (AAI)</li>
+            <li>2000 - The Central Government declared AAI as Deemed University</li>
+            <li>2016 - SHIATS was upgraded and reconstituted as SHUATS</li>
+        </ul>
+
+        <h4>Academic Offerings</h4>
+        <ul class="offerings">
+            <li>42 Undergraduate Programs</li>
+            <li>101 Postgraduate Programs</li>
+            <li>16 Diploma Programs</li>
+            <li>Doctoral Programs in Various Disciplines</li>
+        </ul>
+    </div>
+
+    <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/UpWkGQErSoY" title="SHUATS Video" allowfullscreen></iframe>
+    </div>
+
+    <div class="grey-bg mt-4">
+        <p>SHUATS aims to empower students with practical skills, innovative research, and leadership training.</p>
+    </div>
+    <a href="https://shuats.edu.in/" class="btn-linkout" target="_blank">Visit SHUATS Website</a>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
+{% endblock %}

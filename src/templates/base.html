@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RHTC{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+    <!-- Human Assistant Button -->
+    <div class="assistant-container">
+        <button class="assistant-btn" onclick="connectToAssistant()">
+            <i class="fas fa-user-md"></i>
+        </button>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-left">
+            <a href="https://shuats.edu.in/">
+                <img src="{% static 'images/image.png' %}" alt="SHUATS Logo" class="logo" />
+            </a>
+        </div>
+        <div class="header-right"></div>
+        <h1>Rare & Hard to Treat Cancers</h1>
+        <div class="header-right"></div>
+        <div class="header-left">
+            <a href="{% url 'core:home' %}">
+                <img src="{% static 'images/image.png' %}" alt="ICPC Logo" class="logo" />
+            </a>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a class='nav-title' href="{% url 'core:home' %}">Home</a>
+            </li>
+            
+            <li class="nav-item has-dropdown">
+                <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'cancer-dropdown', this)">
+                    <span class="nav-title">About Us<span class="arrow">▼</span></span>
+                    <div class="dropdown" id="cancer-dropdown">
+                        <ul class="dropdown-list">
+                            <li><a class='dropdown-item' href="{% url 'core:about' %}">History</a></li>
+                            <!-- <li><a class='dropdown-item' href="{% url 'core:profile' %}">Profile</a></li> -->
+                            <li><a class='dropdown-item' href="{% url 'questions:category' %}">FAQs</a></li>
+                            <!-- <li><a class='dropdown-item' href="{% url 'core:board' %}">Administration</a></li> -->
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item has-dropdown">
+                <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'services-dropdown')">
+                    <span class="nav-title">Services Offered<span class="arrow">▼</span></span>
+                    <div class="dropdown" id="services-dropdown">
+                        <ul class="dropdown-list">
+                            <li><a href="https://navcancer-ai-lungscan.onrender.com/" class="dropdown-item">AI based Prediction</a></li>
+                            <li><a class='dropdown-item' href="https://cancer.ktripathi.site/CancerCareLocator/">Cancer Centers</a></li>
+                            <li><a class='dropdown-item' href="{% url 'tailored_info:esr_home' %}">Connect with Experts</a></li>
+                            <li><a class='dropdown-item' href="{% url 'tailored_info:schemes' %}">Government Schemes</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item has-dropdown">
+                <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'events-dropdown')">
+                    <span class="nav-title">Events<span class="arrow">▼</span></span>
+                    <div class="dropdown" id="events-dropdown">
+                        <ul class="dropdown-list">
+                            <li><a class='dropdown-item' href="{% url 'events:list' %}">All Events</a></li>
+                            <li><a class='dropdown-item' href="{% url 'events:gallery' %}">Gallery</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item has-dropdown">
+                <div class="dropdown-wrapper" onclick="toggleDropdown(event, 'external-dropdown')">
+                    <span class="nav-title">External Links<span class="arrow">▼</span></span>
+                    <div class="dropdown" id="external-dropdown">
+                        <ul class="dropdown-list">
+                            <li><a class="dropdown-item" href="https://shuats.edu.in/" target="_blank">SHUATS</a></li>
+                            <li><a class="dropdown-item" href="https://unite4cancer.com/" target="_blank">ICPC</a></li>
+                            <li><a class="dropdown-item" href="https://www.mohfw.gov.in/" target="_blank">MOHFW</a></li>
+                            <li><a class="dropdown-item" href="https://www.icmr.gov.in/" target="_blank">ICMR</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="esr-main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/chatbot.js' %}"></script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

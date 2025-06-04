@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - RHTC{% endblock %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock %}
+{% block content %}
+
+<main class="esr-main">
+    <!-- Stage Selection Section -->
+    <section class="stage-selection">
+        <h2 class="services-title">Rare & Hard to Treat Cancers</h2>
+        <div class="stage-cards-container">
+            <!-- Tailored Information Card -->
+            <div class="stage-card early-stage">
+              <div class="stage-icon">
+                <i class="fas fa-info-circle"></i>
+              </div>
+              <h3>Tailored Information</h3>
+              <p>
+                Access personalized resources about lung cancer, including risk factors, early warning signs, and prevention strategies tailored to your needs.
+              </p>
+              <a href="{% url 'tailored_info:options_details' %}" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- Guidelines Card -->
+            <div class="stage-card during-stage">
+              <div class="stage-icon">
+                <i class="fas fa-book-medical"></i>
+              </div>
+              <h3>Guidelines</h3>
+              <p>
+                Explore comprehensive medical guidelines, standard protocols, and best practices for lung cancer diagnosis and management.
+              </p>
+              <a href="{% url 'guidelines:list' %}" class="stage-btn">Learn More</a>
+            </div>
+
+            <!-- Treatment Options Card -->
+            <div class="stage-card after-stage">
+              <div class="stage-icon">
+                <i class="fas fa-stethoscope"></i>
+              </div>
+              <h3>Treatment Options</h3>
+              <p>
+                Discover various treatment approaches, from traditional therapies to innovative solutions, helping you make informed decisions about care.
+              </p>
+              <a href="#" class="stage-btn">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="esr-hero">
+        <div class="esr-hero-content">
+            <h1 class="esr-title">"Early Detection Saves Lives."</h1>
+            <p class="esr-subtitle">
+                Let's spread awareness, break the silence, and fight cancer with knowledge & kindness.
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+<section class="testimonials-section">
+  <h2 class="section-title">What People Say</h2>
+  <div class="testimonials-container">
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        "This platform has been a lifesaver for me. The resources and support I received were invaluable during my treatment."
+      </p>
+      <h4 class="testimonial-author">- John Doe</h4>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        "As a healthcare professional, I found the AI-based prediction tool extremely helpful in diagnosing early-stage cancer."
+      </p>
+      <h4 class="testimonial-author">- Dr. Jane Smith</h4>
+    </div>
+    <div class="testimonial-card">
+      <p class="testimonial-text">
+        "The information provided here is comprehensive and easy to understand. Highly recommended for patients and families."
+      </p>
+      <h4 class="testimonial-author">- Emily Johnson</h4>
+    </div>
+  </div>
+</section>
+
+    <!-- Partners Section -->
+    <section class="partners-section">
+        <h2 class="section-title">Our Partners</h2>
+        <div class="partners-container">
+            <img src="{% static 'images/event1.jpg' %}" alt="Partner 1" class="partner-logo" />
+            <img src="{% static 'images/event2.jpg' %}" alt="Partner 2" class="partner-logo" />
+            <img src="{% static 'images/event3.jpg' %}" alt="Partner 3" class="partner-logo" />
+            <img src="{% static 'images/event4.jpg' %}" alt="Partner 4" class="partner-logo" />
+        </div>
+    </section>
+
+    <!-- Contact Us Section -->
+<section class="contact-section">
+  <h2 class="section-title">Get in Touch</h2>
+  <div class="contact-container">
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Your Name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Your Email" required />
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+      </div>
+      <button type="submit" class="contact-btn">Send Message</button>
+    </form>
+  </div>
+</section>
+
+  </main>
+{% endblock %}

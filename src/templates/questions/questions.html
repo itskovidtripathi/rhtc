@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ category.name }} Questions - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .questions-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+    }
+
+    .category-title {
+        color: #072ACB;
+        font-size: 2.5rem;
+        margin-bottom: 40px;
+        text-align: center;
+        position: relative;
+    }
+
+    .category-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #FCF300;
+    }
+
+    .question-item {
+        background: white;
+        border-radius: 12px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .question-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .question-header {
+        padding: 20px 25px;
+        background: #fff;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .question-header.active {
+        border-radius: 12px 12px 0 0;
+        background: #f8f9fa;
+        color: #072ACB;
+    }
+
+    .question-header:hover {
+        background: #f8f9fa;
+    }
+
+    .question-text {
+        flex: 1;
+        text-align: left;
+        font-size: 1.1rem;
+        font-weight: 500;
+        padding-right: 20px;
+        line-height: 1.4;
+    }
+
+    .question-header i {
+        transition: transform 0.3s ease;
+        color: #072ACB;
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+
+    .question-header.active i {
+        transform: rotate(180deg);
+    }
+
+    .answer {
+        padding: 0 25px;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        text-align: left;
+        background: #f8f9fa;
+        border-radius: 0 0 12px 12px;
+        opacity: 0;
+    }
+
+    .answer.show {
+        padding: 20px 25px;
+        max-height: 500px;
+        opacity: 1;
+    }
+
+    .answer p {
+        color: #333;
+        line-height: 1.6;
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    .no-questions {
+        text-align: center;
+        color: #666;
+        padding: 40px;
+        font-size: 1.2rem;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    /* Category indicator */
+    .category-indicator {
+        text-align: center;
+        margin-bottom: 30px;
+        color: #666;
+        font-size: 1.1rem;
+    }
+
+    .category-indicator span {
+        color: #072ACB;
+        font-weight: 500;
+    }
+
+    /* Question counter */
+    .question-count {
+        text-align: center;
+        margin: 20px 0 40px;
+        color: #666;
+        font-size: 0.95rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Back Button -->
+<div class="back-button-container">
+    <a href="{% url 'questions:category' %}" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to Categories
+    </a>
+</div>
+
+<main class="esr-main">
+    <section class="stage-selection">
+        <h2 class="category-title">{{ category.name }}</h2>
+        
+        <div class="category-indicator">
+            Category: <span>{{ category.name }}</span>
+        </div>
+
+        <div class="question-count">{{ questions|length }} questions available</div>
+        
+        <div class="questions-container">
+            {% for question in questions %}
+            <div class="question-item">
+                <div class="question-header" onclick="toggleAnswer({{ forloop.counter0 }})">
+                    <div class="question-text">{{ question.question }}</div>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="answer" id="answer-{{ forloop.counter0 }}">
+                    <p>{{ question.answer }}</p>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-questions">
+                No questions available for this category.
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function toggleAnswer(index) {
+        const answer = document.getElementById(`answer-${index}`);
+        const header = answer.previousElementSibling;
+        const allAnswers = document.querySelectorAll('.answer');
+        const allHeaders = document.querySelectorAll('.question-header');
+        
+        allAnswers.forEach((item, i) => {
+            if (i !== index) {
+                item.classList.remove('show');
+                allHeaders[i].classList.remove('active');
+            }
+        });
+        
+        answer.classList.toggle('show');
+        header.classList.toggle('active');
+    }
+</script>
+{% endblock %}

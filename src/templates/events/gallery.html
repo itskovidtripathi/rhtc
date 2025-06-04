@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Gallery - RHTC{% endblock %}
+
+{% block content %}
+<!-- Main Content -->
+<div class="container gallery-section">
+    <h2 class="text-center">Our Gallery</h2>
+
+    <div class="row">
+        <!-- Gallery Item 1 -->
+        <div class="col-md-4 col-sm-6">
+            <div class="gallery-card">
+                <img src="{% static 'images/gallery1.jpg' %}" alt="Gallery Image 1" class="img-fluid">
+                <div class="overlay">
+                    <p class="caption">Cancer Awareness Rally 2024</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Item 2 -->
+        <div class="col-md-4 col-sm-6">
+            <div class="gallery-card">
+                <img src="{% static 'images/gallery2.jpg' %}" alt="Gallery Image 2" class="img-fluid">
+                <div class="overlay">
+                    <p class="caption">Lung Health Workshop</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gallery Item 3 -->
+        <div class="col-md-4 col-sm-6">
+            <div class="gallery-card">
+                <img src="{% static 'images/gallery3.jpg' %}" alt="Gallery Image 3" class="img-fluid">
+                <div class="overlay">
+                    <p class="caption">Screening Camp Volunteers</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

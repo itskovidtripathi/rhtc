@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load static %}
+    <title>{% block title %}Cancer Guidelines - RHTC{% endblock %}</title>
+   {% block extra_css %}
+    <style>
+        .guideline-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .language-badge {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .no-guidelines {
+            text-align: center;
+            padding: 2rem;
+            background: #f5f5f5;
+            border-radius: 8px;
+            grid-column: 1 / -1;
+        }
+
+        .stage-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stage-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stage-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stage-icon {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 1.5rem;
+        }
+
+        .stage-card h3 {
+            color: #072ACB;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stage-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .stage-btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #072ACB;
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .stage-btn:hover {
+            background: #0520A0;
+        }
+    </style>
+    {% endblock %}
+
+    {% block content %}
+    <main class="esr-main">
+        <section class="stage-selection">
+            <h2 class="services-title">Cancer Treatment Guidelines</h2>
+            <div class="stage-cards-container">
+                <!-- Lung Cancer -->
+                <div class="stage-card early-stage">
+                    <div class="stage-icon">
+                        <i class="fas fa-lungs"></i>
+                    </div>
+                    <h3>Lung Cancer</h3>
+                    <p>Comprehensive guidelines for lung cancer diagnosis, treatment protocols, and management strategies for healthcare professionals.</p>
+                    <a href="{% url 'guidelines:lung' %}" class="stage-btn">View Guidelines</a>
+                </div>
+
+                <!-- Breast Cancer -->
+                <div class="stage-card during-stage">
+                    <div class="stage-icon">
+                        <i class="fas fa-ribbon"></i>
+                    </div>
+                    <h3>Breast Cancer</h3>
+                    <p>Evidence-based guidelines for breast cancer screening, diagnosis, treatment options, and follow-up care protocols.</p>
+                    <a href="#" class="stage-btn">View Guidelines</a>
+                </div>
+
+                <!-- Oral Cancer -->
+                <div class="stage-card after-stage">
+                    <div class="stage-icon">
+                        <i class="fas fa-tooth"></i>
+                    </div>
+                    <h3>Oral Cancers</h3>
+                    <p>General guidelines for the prevention, early detection, and treatment of various other types of cancers.</p>
+                    <a href="#" class="stage-btn">View Guidelines</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="esr-hero">
+            <div class="esr-hero-content">
+                <h1 class="esr-title">"Evidence-Based Care Guidelines"</h1>
+                <p class="esr-subtitle">
+                    Standardized protocols and best practices for cancer diagnosis and treatment
+                </p>
+            </div>
+        </section>
+    </main>
+    {% endblock %}
+

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Lung Cancer Guidelines - RHTC{% endblock %}
+
+    {% block content %}
+ 
+    <main class="esr-main">
+        <section class="stage-selection">
+            <h2 class="services-title">Lung Cancer Guidelines</h2>
+            <div class="stage-cards-container">
+                <!-- English Version Card -->
+                <div class="stage-card early-stage">
+                    <div class="stage-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Lung Cancer Screening - English Version 2023</h3>
+                    <p>
+                        Comprehensive screening guidelines for lung cancer in English, including early detection protocols and risk assessment methods.
+                    </p>
+                    <a href="{% static 'pdf/lung_screening-patient.pdf' %}" class="stage-btn" target="_blank">View PDF</a>
+                </div>
+
+                <!-- Hindi Version Card -->
+                <div class="stage-card during-stage">
+                    <div class="stage-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Lung Cancer Screening - Hindi Version 2023</h3>
+                    <p>
+                        हिंदी में फेफड़ों के कैंसर की स्क्रीनिंग के लिए व्यापक दिशानिर्देश, जिसमें प्रारंभिक पहचान प्रोटोकॉल शामिल हैं。
+                    </p>
+                    <a href="#" class="stage-btn">Download PDF</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="esr-hero">
+            <div class="esr-hero-content">
+                <h1 class="esr-title">"Early Detection Guidelines"</h1>
+                <p class="esr-subtitle">
+                    Standardized protocols for lung cancer screening and diagnosis
+                </p>
+            </div>
+        </section>
+    </main>
+    {% endblock %}
+
+    
