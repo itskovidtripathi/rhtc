@@ -33,7 +33,7 @@
                 </div>
                 <h3>NGOs for Rare & Hard to Treat Cancers</h3>
                 <p>Connect with organizations providing support, resources, and assistance for patients with rare cancer types.</p>
-                <a href="#" class="stage-btn">Find NGOs</a>
+                <a href="{% url 'ngos:list' %}" class="stage-btn">Find NGOs</a>
             </div>
 
             <!-- Community Forum Card -->
@@ -67,9 +67,9 @@
                 </div>
                 <h3>Cancer Screening</h3>
                 <p>
-                    Learn about regular screening tests, early detection methods, and recommended screening schedules for different cancer types.
+                    Discover how AI-powered screening tools like image-based scanning (IBS) are transforming early cancer detection with greater speed and accuracy.
                 </p>
-                <a href="#" class="stage-btn">View Screening Info</a>
+                <a href="https://navcancer-ai-lungscan.onrender.com/" class="stage-btn">View Screening Info</a>
             </div>
 
             <!-- Risk Assessment Card -->
@@ -81,7 +81,7 @@
                 <p>
                     Understand your cancer risk factors through our comprehensive assessment tools and personalized recommendations.
                 </p>
-                <a href="#" class="stage-btn">Start Assessment</a>
+                <a href="{% url 'questions:list' 'risk' %}" class="stage-btn">Start Assessment</a>
             </div>
 
             <!-- Questions to Ask Card -->

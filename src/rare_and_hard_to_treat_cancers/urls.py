@@ -27,4 +27,5 @@ urlpatterns = [
     path('guidelines/', include('apps.guidelines.urls')),
     path('questions/', include('apps.questions.urls')),
     path('info/', include('apps.tailored_info.urls')),
+    path('ngo/', include('apps.ngos.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

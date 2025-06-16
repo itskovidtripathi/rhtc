@@ -1,0 +1,325 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ ngo.name }} - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .ngo-header {
+        background: linear-gradient(rgba(7, 42, 203, 0.05), rgba(7, 42, 203, 0.1));
+        padding: 3rem 2rem;
+        border-radius: 15px;
+        margin-bottom: 3rem;
+        text-align: center;
+        animation: fadeIn 0.8s ease-out;
+    }
+
+    .ngo-title {
+        font-size: 2.5rem;
+        color: #072ACB;
+        margin-bottom: 1rem;
+    }
+
+    .founded-info {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .coverage-badge {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 0.5rem 1.5rem;
+        border-radius: 50px;
+        display: inline-block;
+        font-size: 0.9rem;
+        transition: transform 0.3s ease;
+    }
+
+    .coverage-badge:hover {
+        transform: translateY(-2px);
+    }
+
+    .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 2rem auto;
+        max-width: 1200px;
+        padding: 0 1rem;
+    }
+
+    .info-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    .card-header i {
+        font-size: 1.8rem;
+        color: #072ACB;
+    }
+
+    .card-header h3 {
+        color: #072ACB;
+        font-size: 1.4rem;
+        margin: 0;
+    }
+
+    .services-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .service-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.8rem;
+        padding: 0.8rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    .service-item:hover {
+        background: #e3f2fd;
+    }
+
+    .service-item i {
+        color: #072ACB;
+        margin-top: 0.2rem;
+    }
+
+    .contact-list {
+        display: grid;
+        gap: 1rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.8rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        background: #e3f2fd;
+        transform: translateX(5px);
+    }
+
+    .contact-item i {
+        color: #072ACB;
+    }
+
+    .description-card {
+        grid-column: 1 / -1;
+        text-align: justify;
+        line-height: 1.8;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+        margin-top: 2rem;
+        justify-content: center;
+    }
+
+    .social-link {
+        color: #072ACB;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .social-link:hover {
+        transform: translateY(-3px);
+    }
+
+    .website-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        background: #072ACB;
+        color: white;
+        padding: 1rem 2rem;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        margin-top: 2rem;
+    }
+
+    .website-btn:hover {
+        background: #0520A0;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(7, 42, 203, 0.3);
+    }
+
+    .remarks-section {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: 2rem;
+        padding: 2rem;
+        background: linear-gradient(rgba(7, 42, 203, 0.05), rgba(7, 42, 203, 0.1));
+        border-radius: 12px;
+    }
+
+    .remarks-section p {
+        font-style: italic;
+        color: #444;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.8;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .fade-in {
+        animation: fadeIn 0.8s ease-out;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="back-button-container">
+    <a href="{% url 'ngos:list' %}" class="back-button">
+        <i class="fas fa-arrow-left"></i>
+        Back to NGOs
+    </a>
+</div>
+
+<main class="esr-main">
+    <div class="ngo-header">
+        <h1 class="ngo-title">{{ ngo.name }}</h1>
+        <p class="founded-info">Founded in {{ ngo.founded_year }} by {{ ngo.founded_by }}</p>
+        <span class="coverage-badge">
+            <i class="fas fa-map-marker-alt"></i>
+            {{ ngo.coverage }}
+        </span>
+        <div class="social-links">
+            {% for platform, url in ngo.social_media.items %}
+            <a href="{{ url }}" class="social-link" target="_blank">
+                <i class="fab fa-{{ platform }}"></i>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="content-grid">
+        <div class="info-card description-card fade-in">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i>
+                <h3>About the Organization</h3>
+            </div>
+            <p>{{ ngo.description }}</p>
+        </div>
+
+        <div class="info-card fade-in">
+            <div class="card-header">
+                <i class="fas fa-hands-helping"></i>
+                <h3>Services Offered</h3>
+            </div>
+            <div class="services-list">
+                {% for service in ngo.services %}
+                <div class="service-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ service }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="info-card fade-in">
+            <div class="card-header">
+                <i class="fas fa-address-card"></i>
+                <h3>Contact Information</h3>
+            </div>
+            <div class="contact-list">
+                {% if ngo.contact_info.phone %}
+                {% for phone in ngo.contact_info.phone %}
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>{{ phone }}</span>
+                </div>
+                {% endfor %}
+                {% endif %}
+
+                {% if ngo.contact_info.email %}
+                {% for email in ngo.contact_info.email %}
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>{{ email }}</span>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+            <div class="text-center">
+                <a href="{{ ngo.website }}" class="website-btn" target="_blank">
+                    Visit Website
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+
+        {% if ngo.remarks %}
+        <div class="remarks-section fade-in">
+            <div class="card-header">
+                <i class="fas fa-quote-left"></i>
+                <h3>Additional Information</h3>
+            </div>
+            <p>{{ ngo.remarks }}</p>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Intersection Observer for fade-in animations
+    document.addEventListener('DOMContentLoaded', function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.8s ease-out';
+            observer.observe(el);
+        });
+    });
+</script>
+{% endblock %}

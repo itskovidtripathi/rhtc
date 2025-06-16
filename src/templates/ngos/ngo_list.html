@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}NGOs Supporting Cancer Patients - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .ngo-cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .ngo-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .ngo-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .ngo-header {
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .ngo-name {
+        color: #072ACB;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .ngo-founded {
+        color: #666;
+        font-size: 0.9rem;
+    }
+
+    .ngo-services {
+        margin: 1rem 0;
+    }
+
+    .services-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.5rem;
+    }
+
+    .service-tag {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+    }
+
+    .contact-info {
+        margin: 1.5rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        color: #444;
+    }
+
+    .contact-item i {
+        color: #072ACB;
+        width: 20px;
+    }
+
+    .ngo-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #eee;
+    }
+
+    .btn-view {
+        background: #072ACB;
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border-radius: 50px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .btn-view:hover {
+        background: #0520A0;
+        transform: translateY(-2px);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+    }
+
+    .social-link {
+        color: #072ACB;
+        font-size: 1.2rem;
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+        transform: scale(1.2);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="esr-main">
+    <section class="stage-selection">
+        <h2 class="services-title">NGOs Supporting Cancer Patients</h2>
+        
+        <div class="ngo-cards-container">
+            {% for ngo in ngos %}
+            <div class="ngo-card">
+                <div class="ngo-header">
+                    <i class="fas fa-hands-helping fa-2x" style="color: #072ACB;"></i>
+                    <div>
+                        <h3 class="ngo-name">{{ ngo.name }}</h3>
+                        <p class="ngo-founded">Founded: {{ ngo.founded_year }} by {{ ngo.founded_by }}</p>
+                    </div>
+                </div>
+
+                <div class="ngo-services">
+                    <h4>Services Offered:</h4>
+                    <div class="services-list">
+                        {% for service in ngo.services|slice:":3" %}
+                        <span class="service-tag">{{ service }}</span>
+                        {% endfor %}
+                        {% if ngo.services|length > 3 %}
+                        <span class="service-tag">+{{ ngo.services|length|add:"-3" }} more</span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    {% if ngo.contact_info.phone %}
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>{{ ngo.contact_info.phone.0 }}</span>
+                    </div>
+                    {% endif %}
+                    {% if ngo.contact_info.email %}
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>{{ ngo.contact_info.email.0 }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="ngo-footer">
+                    <div class="social-links">
+                        {% for platform, url in ngo.social_media.items %}
+                        <a href="{{ url }}" class="social-link" target="_blank">
+                            <i class="fab fa-{{ platform }}"></i>
+                        </a>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'ngos:detail' ngo.pk %}" class="btn-view">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="no-ngos">
+                <p>No NGOs available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}

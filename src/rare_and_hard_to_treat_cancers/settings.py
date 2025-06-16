@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'apps.guidelines.apps.GuidelinesConfig',
     'apps.questions.apps.QuestionsConfig',
     'apps.tailored_info.apps.TailoredInfoConfig',
+    'apps.ngos.apps.NgosConfig',
 
 ]
 
