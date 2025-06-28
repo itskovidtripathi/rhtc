@@ -28,4 +28,5 @@ urlpatterns = [
     path('questions/', include('apps.questions.urls')),
     path('info/', include('apps.tailored_info.urls')),
     path('ngo/', include('apps.ngos.urls')),
+    path('human-interface/', include('apps.human_interface.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

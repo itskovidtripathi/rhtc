@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Care Givers - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .caregivers-section {
+        margin: 3rem 0;
+    }
+    .caregivers-title {
+        text-align: center;
+        font-size: 2.3rem;
+        color: #072ACB;
+        margin-bottom: 2rem;
+    }
+    .caregivers-cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+    .stage-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        padding: 2.2rem 1.5rem 2rem 1.5rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 0;
+        min-height: 0;
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+    .stage-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.13);
+    }
+    .stage-icon {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.2rem;
+        border: 3px solid #072ACB;
+        font-size: 2.5rem;
+        color: #072ACB;
+        overflow: hidden;
+        position: relative;
+    }
+    .stage-icon img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .caregiver-name {
+        font-size: 1.3rem;
+        color: #072ACB;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        word-break: break-word;
+    }
+    .caregiver-designation {
+        color: #1976d2;
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        word-break: break-word;
+    }
+    .caregiver-specialization {
+        color: #444;
+        font-size: 0.98rem;
+        margin-bottom: 1.2rem;
+        word-break: break-word;
+    }
+    .stage-btn {
+        display: inline-block;
+        padding: 0.8rem 1.5rem;
+        background: #072ACB;
+        color: white;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 1rem;
+        transition: background 0.3s, transform 0.3s;
+        margin-top: auto;
+        white-space: nowrap;
+    }
+    .stage-btn:hover {
+        background: #0520A0;
+        transform: translateY(-2px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="esr-main">
+    <section class="caregivers-section">
+        <h2 class="caregivers-title">Our Care Givers</h2>
+        <div class="caregivers-cards-container">
+            <!-- Care Giver 1 -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <img src="{% static 'images/caregiver1.jpeg' %}" alt="Er. Rishabh Chaudhary">
+                </div>
+                <div class="caregiver-name">Er. Rishabh Chaudhary</div>
+                <div class="caregiver-designation">Associate Professor</div>
+                <div class="caregiver-specialization">DBMS &amp; Web Technologies</div>
+                <a href="#" class="stage-btn">Book Appointment</a>
+            </div>
+            <!-- Care Giver 2 -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <img src="{% static 'images/caregiver2.png' %}" alt="Prof. (Dr.) Deepak Lal">
+                </div>
+                <div class="caregiver-name">Prof. (Dr.) Deepak Lal</div>
+                <div class="caregiver-designation">Professor</div>
+                <div class="caregiver-specialization">Remote Sensing &amp; GIS, Evapotranspiration, Surface Energy Balance Modelling, Agricultural Water Management, Yield Modelling</div>
+                <a href="#" class="stage-btn">Book Appointment</a>
+            </div>
+            <!-- Care Giver 3 -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <img src="{% static 'images/caregiver3.png' %}" alt="Prof. Dr. ir. Jonathan A. Lal">
+                </div>
+                <div class="caregiver-name">Prof. Dr. ir. Jonathan A. Lal</div>
+                <div class="caregiver-designation">Professor</div>
+                <div class="caregiver-specialization">Biotechnology, Public Health Genomics, Bioproduct Design</div>
+                <a href="#" class="stage-btn">Book Appointment</a>
+            </div>
+            <!-- Care Giver 4 -->
+            <div class="stage-card early-stage">
+                <div class="stage-icon">
+                    <img src="{% static 'images/caregiver4.png' %}" alt="Prof. (Dr.) Ashok Tripathi">
+                </div>
+                <div class="caregiver-name">Prof. (Dr.) Ashok Tripathi</div>
+                <div class="caregiver-designation">Professor </div>
+                <div class="caregiver-specialization">Directorate of Career Planning &amp; Counseling, Department of Farm Machinery &amp; Power Engineering</div>
+                <a href="#" class="stage-btn">Book Appointment</a>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+

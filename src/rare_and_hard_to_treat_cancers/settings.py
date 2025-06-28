@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'apps.questions.apps.QuestionsConfig',
     'apps.tailored_info.apps.TailoredInfoConfig',
     'apps.ngos.apps.NgosConfig',
+    'apps.human_interface.apps.HumanInterfaceConfig',
 
 ]
 
