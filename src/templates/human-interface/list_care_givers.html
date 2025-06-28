@@ -109,25 +109,25 @@
     <section class="caregivers-section">
         <h2 class="caregivers-title">Our Care Givers</h2>
         <div class="caregivers-cards-container">
-            <!-- Care Giver 1 -->
+            {% for caregiver in caregivers %}
             <div class="stage-card early-stage">
                 <div class="stage-icon">
-                    <img src="{% static 'images/caregiver1.jpeg' %}" alt="Er. Rishabh Chaudhary">
+                    <img src="{% if caregiver.profile_image %}{{ caregiver.profile_image.url }}{% else %}{% static 'images/default-profile.png' %}{% endif %}" alt="{{ caregiver.full_name }}">
                 </div>
-                <div class="caregiver-name">Er. Rishabh Chaudhary</div>
-                <div class="caregiver-designation">Associate Professor</div>
-                <div class="caregiver-specialization">DBMS &amp; Web Technologies</div>
-                <a href="#" class="stage-btn">Book Appointment</a>
+                <div class="caregiver-name">{{ caregiver.full_name }}</div>
+                <div class="caregiver-designation">{{ caregiver.designation }}</div>
+                <div class="caregiver-specialization">{{ caregiver.specialty }}</div>
+                <a href="{% url 'human_interface:care_giver_detail' caregiver.pk %}" class="stage-btn">View Profile</a>
             </div>
-            <!-- Care Giver 2 -->
-            <div class="stage-card early-stage">
-                <div class="stage-icon">
-                    <img src="{% static 'images/caregiver2.png' %}" alt="Prof. (Dr.) Deepak Lal">
-                </div>
-                <div class="caregiver-name">Prof. (Dr.) Deepak Lal</div>
-                <div class="caregiver-designation">Professor</div>
-                <div class="caregiver-specialization">Remote Sensing &amp; GIS, Evapotranspiration, Surface Energy Balance Modelling, Agricultural Water Management, Yield Modelling</div>
-                <a href="#" class="stage-btn">Book Appointment</a>
+            {% empty %}
+            <div class="no-caregivers">
+                <p>No caregivers available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+</main>
+{% endblock %}
             </div>
             <!-- Care Giver 3 -->
             <div class="stage-card early-stage">
@@ -152,5 +152,5 @@
         </div>
     </section>
 </main>
-{% endblock %}
+
 

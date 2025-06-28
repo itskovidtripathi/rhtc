@@ -1,0 +1,425 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Caregiver Sign Up - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .signup-section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        padding: 3rem 0;
+    }
+    .signup-card {
+        background: #fff;
+        border-radius: 22px;
+        box-shadow: 0 8px 36px rgba(7,42,203,0.13), 0 1.5px 8px rgba(7,42,203,0.06);
+        padding: 3.5rem 3.5rem 2.5rem 3.5rem;
+        width: 540px;
+        margin: 0 auto;
+        text-align: left;
+        animation: fadeIn 0.7s;
+        border: 1.5px solid #e3e6f0;
+        position: relative;
+        overflow: hidden;
+    }
+    .signup-title {
+        color: #072ACB;
+        font-size: 2.2rem;
+        margin-bottom: 2.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        justify-content: flex-start;
+    }
+    .signup-title i {
+        color: #072ACB;
+        font-size: 2.2rem;
+    }
+    .signup-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        z-index: 1;
+        position: relative;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+        position: relative;
+    }
+    .form-label {
+        color: #072ACB;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        font-size: 1.08rem;
+        letter-spacing: 0.5px;
+    }
+    .form-input {
+        width: 100%;
+        padding: 1.1rem 1.1rem;
+        border: 1.5px solid #e3e6f0;
+        border-radius: 12px;
+        font-size: 1.13rem;
+        background: #f8f9fa;
+        transition: border 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 2px rgba(7,42,203,0.03);
+    }
+    .form-input:focus {
+        border-color: #072ACB;
+        outline: none;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.09);
+    }
+    .accept-terms-label {
+        display: flex;
+        align-items: center;
+        font-size: 0.98rem;
+        color: #444;
+        gap: 0.5rem;
+        cursor: pointer;
+        user-select: none;
+        margin-top: 0.2rem;
+    }
+    .accept-terms-checkbox {
+        accent-color: #072ACB;
+        width: 1.1em;
+        height: 1.1em;
+        margin-right: 0.3em;
+    }
+    .signup-btn {
+        background: linear-gradient(90deg, #072ACB 60%, #1976d2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 0;
+        font-size: 1.18rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        margin-top: 0.5rem;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+    }
+    .signup-btn:hover {
+        background: linear-gradient(90deg, #0520A0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.18);
+    }
+    .signup-links {
+        margin-top: 1.7rem;
+        font-size: 1rem;
+        color: #666;
+        z-index: 1;
+        position: relative;
+        text-align: center;
+    }
+    .signup-links a {
+        color: #072ACB;
+        text-decoration: none;
+        margin-left: 0.5rem;
+        transition: color 0.2s;
+        font-weight: 600;
+    }
+    .signup-links a:hover {
+        color: #0520A0;
+        text-decoration: underline;
+    }
+    .form-error {
+        color: #e74c3c;
+        font-size: 0.97rem;
+        margin-top: 0.2rem;
+        text-align: left;
+        min-height: 1.2em;
+    }
+    .toggle-password-btn {
+        position: absolute;
+        right: 1.2rem;
+        top: 58%;
+        transform: translateY(-50%);
+        background: none !important;
+        border: none;
+        color: #888;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 2;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent !important;
+    }
+    .toggle-password-btn:focus {
+        outline: none;
+    }
+    .toggle-password-btn span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        min-height: 22px;
+        line-height: 0;
+    }
+    .toggle-password-btn img {
+        width: 22px;
+        height: 22px;
+        display: block;
+        margin: 0;
+        padding: 0;
+        min-width: 22px;
+        min-height: 22px;
+        filter: grayscale(1) brightness(0.7);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 700px) {
+        .signup-card {
+            width: 98vw;
+            padding: 2rem 0.5rem 1.5rem 0.5rem;
+        }
+        .signup-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="signup-section">
+    <div class="signup-card">
+        <div class="signup-title">
+            <i class="fas fa-user-md"></i> Caregiver Sign Up
+        </div>
+        <form method="post" class="signup-form" id="signupForm" enctype="multipart/form-data" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form-input" placeholder="Enter your full name" required>
+                <div class="form-error" id="fullNameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="whatsapp" class="form-label">Mobile Number</label>
+                <input type="tel" id="whatsapp" name="whatsapp" class="form-input" placeholder="Enter your mobile number" required pattern="[6-9][0-9]{9}">
+                <div class="form-error" id="whatsappError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                <div class="form-error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="designation" class="form-label">Designation</label>
+                <input type="text" id="designation" name="designation" class="form-input" placeholder="e.g. Professor, Doctor" required>
+                <div class="form-error" id="designationError"></div>
+            </div>
+            <div class="form-group">
+                <label for="specialty" class="form-label">Area of Specialty</label>
+                <input type="text" id="specialty" name="specialty" class="form-input" placeholder="e.g. Oncology, Nutrition" required>
+                <div class="form-error" id="specialtyError"></div>
+            </div>
+            <div class="form-group">
+                <label for="profile_image" class="form-label">Profile Image</label>
+                <input type="file" id="profile_image" name="profile_image" class="form-input" accept="image/*">
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                <button type="button" class="toggle-password-btn" tabindex="-1" aria-label="Show/Hide Password" onclick="togglePassword(['password','confirm_password'], this)">
+                    <span id="toggle-password-icon-1">
+                        <img src="{% static 'images/visibility_24dp.png' %}" alt="Show password" />
+                    </span>
+                </button>
+                <div class="form-error" id="passwordError"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password" class="form-label">Confirm Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" class="form-input" placeholder="Confirm your password" required>
+                <button type="button" class="toggle-password-btn" tabindex="-1" aria-label="Show/Hide Password" onclick="togglePassword(['password','confirm_password'], this)">
+                    <span id="toggle-password-icon-2">
+                        <img src="{% static 'images/visibility_24dp.png' %}" alt="Show password" />
+                    </span>
+                </button>
+                <div class="form-error" id="confirmPasswordError"></div>
+            </div>
+            <label class="accept-terms-label" for="accept_terms">
+                <input type="checkbox" class="accept-terms-checkbox" id="accept_terms" name="accept_terms" required>
+                I accept the <a href="#" target="_blank" style="color:#072ACB;text-decoration:underline;margin:0 0.2em;">Terms & Conditions</a> and <a href="#" target="_blank" style="color:#072ACB;text-decoration:underline;margin:0 0.2em;">Privacy Policy</a>
+            </label>
+            <div class="form-error" id="termsError"></div>
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <div class="signup-links">
+            Already have an account?
+            <a href="{% url 'accounts:caregiver_login' %}">Caregiver Login</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function isStrongPassword(pw) {
+        return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/.test(pw);
+    }
+
+    function togglePassword(ids, btn) {
+        let show = false;
+        ids.forEach(function(id) {
+            const input = document.getElementById(id);
+            if (input.type === "password") show = true;
+        });
+        ids.forEach(function(id) {
+            const input = document.getElementById(id);
+            input.type = show ? "text" : "password";
+        });
+        document.querySelectorAll('.toggle-password-btn').forEach(function(button) {
+            const icon = button.querySelector('span');
+            if (show) {
+                icon.innerHTML = `<img src="{% static 'images/visibility_off_24dp.png' %}" alt="Hide password" />`;
+            } else {
+                icon.innerHTML = `<img src="{% static 'images/visibility_24dp.png' %}" alt="Show password" />`;
+            }
+        });
+    }
+
+    function validatePasswordMatch() {
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        if (confirmPassword.value && password.value !== confirmPassword.value) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            return false;
+        } else {
+            confirmPasswordError.textContent = "";
+            return true;
+        }
+    }
+
+    document.getElementById('signupForm').addEventListener('submit', function(e) {
+        let valid = true;
+        const fullName = document.getElementById('full_name');
+        const fullNameError = document.getElementById('fullNameError');
+        if (!fullName.value.trim()) {
+            fullNameError.textContent = "Full name is required.";
+            valid = false;
+        } else {
+            fullNameError.textContent = "";
+        }
+        const whatsapp = document.getElementById('whatsapp');
+        const whatsappError = document.getElementById('whatsappError');
+        if (!whatsapp.value.match(/^[6-9][0-9]{9}$/)) {
+            whatsappError.textContent = "Enter a valid 10-digit mobile number starting with 6-9.";
+            valid = false;
+        } else {
+            whatsappError.textContent = "";
+        }
+        const email = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        if (!email.value.trim()) {
+            emailError.textContent = "Email is required.";
+            valid = false;
+        } else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.value.trim())) {
+            emailError.textContent = "Enter a valid email address.";
+            valid = false;
+        } else {
+            emailError.textContent = "";
+        }
+        const designation = document.getElementById('designation');
+        const designationError = document.getElementById('designationError');
+        if (!designation.value.trim()) {
+            designationError.textContent = "Designation is required.";
+            valid = false;
+        } else {
+            designationError.textContent = "";
+        }
+        const specialty = document.getElementById('specialty');
+        const specialtyError = document.getElementById('specialtyError');
+        if (!specialty.value.trim()) {
+            specialtyError.textContent = "Area of specialty is required.";
+            valid = false;
+        } else {
+            specialtyError.textContent = "";
+        }
+        const password = document.getElementById('password');
+        const passwordError = document.getElementById('passwordError');
+        if (!password.value) {
+            passwordError.textContent = "Password is required.";
+            valid = false;
+        } else if (!isStrongPassword(password.value)) {
+            passwordError.textContent = "Password must be at least 8 characters, include uppercase, lowercase, digit, and special character.";
+            valid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+        const confirmPassword = document.getElementById('confirm_password');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+        if (!confirmPassword.value) {
+            confirmPasswordError.textContent = "Please confirm your password.";
+            valid = false;
+        } else if (password.value !== confirmPassword.value) {
+            confirmPasswordError.textContent = "Passwords do not match.";
+            valid = false;
+        } else {
+            confirmPasswordError.textContent = "";
+        }
+        const terms = document.getElementById('accept_terms');
+        const termsError = document.getElementById('termsError');
+        if (!terms.checked) {
+            termsError.textContent = "You must accept the Terms & Conditions and Privacy Policy.";
+            valid = false;
+        } else {
+            termsError.textContent = "";
+        }
+        if (!valid) e.preventDefault();
+    });
+
+    document.getElementById('full_name').addEventListener('input', function() {
+        document.getElementById('fullNameError').textContent = "";
+    });
+    document.getElementById('whatsapp').addEventListener('input', function() {
+        document.getElementById('whatsappError').textContent = "";
+    });
+    document.getElementById('email').addEventListener('input', function() {
+        document.getElementById('emailError').textContent = "";
+    });
+    document.getElementById('designation').addEventListener('input', function() {
+        document.getElementById('designationError').textContent = "";
+    });
+    document.getElementById('specialty').addEventListener('input', function() {
+        document.getElementById('specialtyError').textContent = "";
+    });
+    document.getElementById('password').addEventListener('input', function() {
+        document.getElementById('passwordError').textContent = "";
+        validatePasswordMatch();
+    });
+    document.getElementById('confirm_password').addEventListener('input', function() {
+        validatePasswordMatch();
+    });
+    document.getElementById('password').addEventListener('blur', function() {
+        validatePasswordMatch();
+    });
+    document.getElementById('confirm_password').addEventListener('blur', function() {
+        validatePasswordMatch();
+    });
+    document.getElementById('accept_terms').addEventListener('change', function() {
+        document.getElementById('termsError').textContent = "";
+    });
+</script>
+{% endblock %}

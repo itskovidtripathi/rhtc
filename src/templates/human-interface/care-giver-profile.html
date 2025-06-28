@@ -1,0 +1,400 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Caregiver Profile - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    body {
+        background: #f4f7fb;
+    }
+    .profile-grid-main {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+        gap: 2.5rem;
+        max-width: 1500px;
+        margin: 0 auto 2rem auto;
+        padding: 0 2.5rem;
+        align-items: flex-start;
+    }
+    .profile-sidebar {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 4px 24px rgba(7,42,203,0.10);
+        padding: 2.5rem 2rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 400px;
+        margin-top: 3rem;
+    }
+    .profile-img-xxl {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        object-fit: cover;
+        box-shadow: 0 4px 32px rgba(7,42,203,0.13);
+        background: #fff;
+        border: 6px solid #fff;
+        margin-bottom: 1.5rem;
+    }
+    .profile-sidebar .profile-name {
+        font-size: 2rem;
+        color: #072ACB;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .profile-sidebar .profile-designation {
+        color: #1976d2;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        text-align: center;
+    }
+    .profile-sidebar .profile-specialty {
+        color: #444;
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+    }
+    .profile-sidebar .profile-contact-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.7rem;
+        margin-bottom: 1.2rem;
+        font-size: 1.05rem;
+        align-items: center;
+    }
+    .profile-sidebar .profile-contact-row i {
+        color: #072ACB;
+        margin-right: 0.4rem;
+    }
+    .profile-sidebar .profile-email {
+        color: #1976d2;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+    .profile-sidebar .profile-email:hover {
+        color: #0520A0;
+    }
+    .profile-social-row {
+        display: flex;
+        gap: 1.2rem;
+        margin-top: 0.7rem;
+        align-items: center;
+        justify-content: center;
+    }
+    .profile-social-row a {
+        color: #072ACB;
+        font-size: 1.5rem;
+        transition: color 0.2s, transform 0.2s;
+    }
+    .profile-social-row a:hover {
+        color: #1976d2;
+        transform: translateY(-3px) scale(1.15);
+    }
+    .edit-profile-btn {
+        background: linear-gradient(90deg, #072ACB 60%, #1976d2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 0.8rem 2.2rem;
+        font-size: 1.08rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+        outline: none;
+        margin: 1.2rem auto 0 auto;
+        display: block;
+        width: 90%;
+        text-align: center;
+    }
+    .edit-profile-btn:hover {
+        background: linear-gradient(90deg, #0520A0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.18);
+    }
+
+    .profile-main-content {
+        margin-top: 3rem;
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+    }
+    .profile-bio-section-wide {
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 2px 12px rgba(7,42,203,0.07);
+        padding: 2.5rem 3rem;
+        margin-bottom: 0;
+        min-height: 180px;
+    }
+    .profile-bio-title-xl {
+        color: #072ACB;
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+    }
+    .profile-bio-xl {
+        color: #444;
+        font-size: 1.13rem;
+        line-height: 1.8;
+        margin-bottom: 0;
+        text-align: justify;
+    }
+    .profile-details-table {
+        margin-top: 0;
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.05);
+    }
+    .profile-details-table th, .profile-details-table td {
+        padding: 1.1rem 1.5rem;
+        text-align: left;
+        font-size: 1.08rem;
+    }
+    .profile-details-table th {
+        background: #e3e6f0;
+        color: #072ACB;
+        font-weight: 600;
+        width: 220px;
+        border-right: 1px solid #e3e6f0;
+    }
+    .profile-details-table tr:not(:last-child) td, .profile-details-table tr:not(:last-child) th {
+        border-bottom: 1px solid #e3e6f0;
+    }
+    .profile-actions-row {
+        margin-top: 2.5rem;
+        display: flex;
+        gap: 1.5rem;
+        justify-content: flex-end;
+    }
+    .profile-btn {
+        background: linear-gradient(90deg, #072ACB 60%, #1976d2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 2.5rem;
+        font-size: 1.13rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+        outline: none;
+        position: relative;
+        overflow: hidden;
+    }
+    .profile-btn:hover {
+        background: linear-gradient(90deg, #0520A0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.18);
+    }
+    .bio-readmore-link {
+        color: #1976d2;
+        cursor: pointer;
+        font-weight: 600;
+        margin-left: 0.5rem;
+        text-decoration: underline;
+        transition: color 0.2s;
+    }
+    .bio-readmore-link:hover {
+        color: #072ACB;
+    }
+    @media (max-width: 1200px) {
+        .profile-grid-main {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+        .profile-sidebar {
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: flex-start;
+            margin-top: 2rem;
+            min-height: unset;
+        }
+        .profile-main-content {
+            margin-top: 2rem;
+        }
+    }
+    @media (max-width: 900px) {
+        .profile-bio-section-wide, .profile-details-table {
+            padding: 1.2rem 0.7rem;
+        }
+        .profile-sidebar {
+            padding: 1.5rem 0.7rem;
+        }
+    }
+    @media (max-width: 700px) {
+        .profile-grid-main {
+            grid-template-columns: 1fr;
+            padding: 0 0.2rem;
+        }
+        .profile-sidebar {
+            padding: 1rem 0.2rem;
+        }
+        .profile-bio-section-wide, .profile-details-table {
+            padding: 0.7rem 0.2rem;
+        }
+        .profile-img-xxl {
+            width: 90px;
+            height: 90px;
+        }
+        .profile-name {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <div class="profile-grid-main">
+        <!-- Sidebar -->
+        <aside class="profile-sidebar">
+            <img class="profile-img-xxl"
+                 src="{% if caregiver.profile_image %}{{ caregiver.profile_image.url }}{% else %}{% static 'images/default-profile.png' %}{% endif %}"
+                 alt="{{ caregiver.full_name }}" />
+            <div class="profile-name">{{ caregiver.full_name }}</div>
+            <div class="profile-designation">{{ caregiver.designation }}</div>
+            <div class="profile-specialty">{{ caregiver.specialty }}</div>
+            <div class="profile-contact-row">
+                {% if caregiver.email %}
+                    <span><i class="fas fa-envelope"></i>
+                    <a href="mailto:{{ caregiver.email }}" class="profile-email">{{ caregiver.email }}</a></span>
+                {% endif %}
+                {% if caregiver.contact_number %}
+                    <span><i class="fas fa-phone"></i>{{ caregiver.contact_number }}</span>
+                {% endif %}
+            </div>
+            <div class="profile-social-row">
+                {% if caregiver.social_linked_in %}
+                    <a href="{{ caregiver.social_linked_in }}" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                {% endif %}
+                {% if caregiver.social_twitter %}
+                    <a href="{{ caregiver.social_twitter }}" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                {% endif %}
+                {% if caregiver.social_facebook %}
+                    <a href="{{ caregiver.social_facebook }}" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                {% endif %}
+            </div>
+            {% if user.is_authenticated and user.role.role == 'caregiver' and user.caregiver_profile.pk == caregiver.pk %}
+                <a href="{% url 'human_interface:edit_care_giver_profile' %}" class="edit-profile-btn">
+                    <i class="fas fa-user-edit"></i> Edit Profile
+                </a>
+            {% endif %}
+        </aside>
+        <!-- Main Content -->
+        <section class="profile-main-content">
+            <div class="profile-bio-section-wide">
+                <div class="profile-bio-title-xl">
+                    <i class="fas fa-user"></i> About {{ caregiver.full_name|default:"the Caregiver" }}
+                </div>
+                <div class="profile-bio-xl" id="bio-section">
+                    {% if caregiver.bio %}
+                        {% if caregiver.bio|length > 300 %}
+                            <span id="bio-short">{% with caregiver.bio|slice:":300" as short_bio %}{{ short_bio|linebreaksbr }}...{% endwith %}</span>
+                            <span id="bio-full" style="display:none;">{{ caregiver.bio|linebreaksbr }}</span>
+                            <span class="bio-readmore-link" id="bio-toggle" onclick="toggleBio()">Read more</span>
+                        {% else %}
+                            {{ caregiver.bio|linebreaksbr }}
+                        {% endif %}
+                    {% else %}
+                        No bio information provided.
+                    {% endif %}
+                </div>
+            </div>
+            <table class="profile-details-table">
+                <tr>
+                    <th>Full Name</th>
+                    <td>{{ caregiver.full_name }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>
+                        {% if caregiver.email %}
+                            <a href="mailto:{{ caregiver.email }}" class="profile-email">{{ caregiver.email }}</a>
+                        {% else %}
+                            <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>Designation</th>
+                    <td>{{ caregiver.designation }}</td>
+                </tr>
+                <tr>
+                    <th>Specialty</th>
+                    <td>{{ caregiver.specialty }}</td>
+                </tr>
+                <tr>
+                    <th>Contact Number</th>
+                    <td>{{ caregiver.contact_number|default:"N/A" }}</td>
+                </tr>
+            </table>
+            <div class="profile-actions-row">
+                {% if user.is_authenticated and user.role.role == 'caregiver' and user.caregiver_profile.pk == caregiver.pk %}
+                    <a href="#" class="profile-btn">
+                        <i class="fas fa-calendar-check"></i> Check Your Appointments
+                    </a>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Micro-interaction: Button ripple effect
+    function profileBtnRipple(btn) {
+        const ripple = document.createElement('span');
+        ripple.className = 'ripple';
+        ripple.style.position = 'absolute';
+        ripple.style.background = 'rgba(255,255,255,0.4)';
+        ripple.style.borderRadius = '50%';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.width = ripple.style.height = Math.max(btn.offsetWidth, btn.offsetHeight) + 'px';
+        ripple.style.left = (event.offsetX - btn.offsetWidth / 2) + 'px';
+        ripple.style.top = (event.offsetY - btn.offsetHeight / 2) + 'px';
+        ripple.style.transform = 'scale(0)';
+        ripple.style.opacity = '1';
+        ripple.style.transition = 'transform 0.4s, opacity 0.7s';
+        btn.appendChild(ripple);
+        setTimeout(() => {
+            ripple.style.transform = 'scale(2.5)';
+            ripple.style.opacity = '0';
+        }, 10);
+        setTimeout(() => {
+            ripple.remove();
+        }, 700);
+    }
+
+    // Bio read more/less toggle
+    function toggleBio() {
+        var shortBio = document.getElementById('bio-short');
+        var fullBio = document.getElementById('bio-full');
+        var toggle = document.getElementById('bio-toggle');
+        if (shortBio.style.display !== 'none') {
+            shortBio.style.display = 'none';
+            fullBio.style.display = '';
+            toggle.textContent = 'Read less';
+        } else {
+            shortBio.style.display = '';
+            fullBio.style.display = 'none';
+            toggle.textContent = 'Read more';
+        }
+    }
+</script>
+{% endblock %}

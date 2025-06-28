@@ -1,0 +1,180 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Caregiver Profile - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .edit-profile-section {
+        max-width: 600px;
+        margin: 3rem auto 2rem auto;
+        background: #fff;
+        border-radius: 18px;
+        box-shadow: 0 8px 32px rgba(7,42,203,0.10), 0 1.5px 8px rgba(7,42,203,0.06);
+        padding: 2.5rem 2.5rem 2rem 2.5rem;
+        position: relative;
+        overflow: hidden;
+        animation: fadeInProfile 0.8s;
+    }
+    .edit-profile-title {
+        color: #072ACB;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .edit-profile-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+    }
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0;
+        position: relative;
+    }
+    .form-label {
+        color: #072ACB;
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        font-size: 1.08rem;
+        letter-spacing: 0.5px;
+    }
+    .form-input, .form-textarea {
+        width: 100%;
+        padding: 1rem 1.1rem;
+        border: 1.5px solid #e3e6f0;
+        border-radius: 10px;
+        font-size: 1.08rem;
+        background: #f8f9fa;
+        transition: border 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 2px rgba(7,42,203,0.03);
+    }
+    .form-input:focus, .form-textarea:focus {
+        border-color: #072ACB;
+        outline: none;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+    }
+    .form-textarea {
+        min-height: 90px;
+        resize: vertical;
+    }
+    .profile-img-preview {
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+        border: 3px solid #e3e6f0;
+        background: #f8f9fa;
+        display: block;
+    }
+    .edit-btn {
+        background: linear-gradient(90deg, #072ACB 60%, #1976d2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 0;
+        font-size: 1.15rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        margin-top: 0.5rem;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+    }
+    .edit-btn:hover {
+        background: linear-gradient(90deg, #0520A0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.18);
+    }
+    .form-error {
+        color: #e74c3c;
+        font-size: 0.97rem;
+        margin-top: 0.2rem;
+        text-align: left;
+        min-height: 1.2em;
+    }
+    @keyframes fadeInProfile {
+        from { opacity: 0; transform: translateY(30px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="edit-profile-section">
+        <div class="edit-profile-title">
+            <i class="fas fa-user-edit"></i> Edit Profile
+        </div>
+        <form method="post" class="edit-profile-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% if caregiver.profile_image %}
+                <img src="{{ caregiver.profile_image.url }}" alt="Profile Image" class="profile-img-preview" id="profileImgPreview">
+            {% else %}
+                <img src="{% static 'images/default-profile.png' %}" alt="Profile Image" class="profile-img-preview" id="profileImgPreview">
+            {% endif %}
+            <div class="form-group">
+                <label for="profile_image" class="form-label">Profile Image</label>
+                <input type="file" id="profile_image" name="profile_image" class="form-input" accept="image/*" onchange="previewProfileImg(event)">
+            </div>
+            <div class="form-group">
+                <label for="full_name" class="form-label">Full Name</label>
+                <input type="text" id="full_name" name="full_name" class="form-input" value="{{ caregiver.full_name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" id="email" name="email" class="form-input" value="{{ caregiver.email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="designation" class="form-label">Designation</label>
+                <input type="text" id="designation" name="designation" class="form-input" value="{{ caregiver.designation }}" required>
+            </div>
+            <div class="form-group">
+                <label for="specialty" class="form-label">Area of Specialty</label>
+                <input type="text" id="specialty" name="specialty" class="form-input" value="{{ caregiver.specialty }}" required>
+            </div>
+            <div class="form-group">
+                <label for="contact_number" class="form-label">Contact Number</label>
+                <input type="text" id="contact_number" name="contact_number" class="form-input" value="{{ caregiver.contact_number }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="bio" class="form-label">Bio</label>
+                <textarea id="bio" name="bio" class="form-textarea">{{ caregiver.bio }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="social_linked_in" class="form-label">LinkedIn Profile <span style="color:#888;font-weight:400;">(optional)</span></label>
+                <input type="url" id="social_linked_in" name="social_linked_in" class="form-input" value="{{ caregiver.social_linked_in|default_if_none:'' }}">
+            </div>
+            <div class="form-group">
+                <label for="social_twitter" class="form-label">Twitter Profile <span style="color:#888;font-weight:400;">(optional)</span></label>
+                <input type="url" id="social_twitter" name="social_twitter" class="form-input" value="{{ caregiver.social_twitter|default_if_none:'' }}">
+            </div>
+            <div class="form-group">
+                <label for="social_facebook" class="form-label">Facebook Profile <span style="color:#888;font-weight:400;">(optional)</span></label>
+                <input type="url" id="social_facebook" name="social_facebook" class="form-input" value="{{ caregiver.social_facebook|default_if_none:'' }}">
+            </div>
+            <button type="submit" class="edit-btn">Save Changes</button>
+        </form>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function previewProfileImg(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById('profileImgPreview').src = reader.result;
+        };
+        if(event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+</script>
+{% endblock %}
