@@ -8,8 +8,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     {% block extra_css %}{% endblock %}
+    <style>
+        /* Message Popup Styles */
+        .message-popup-container {
+            position: fixed;
+            top: 32px;
+            right: 32px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+        .message-popup {
+            min-width: 260px;
+            max-width: 350px;
+            background: #fff;
+            color: #072ACB;
+            border-left: 6px solid #072ACB;
+            border-radius: 8px;
+            box-shadow: 0 4px 18px rgba(7,42,203,0.13);
+            padding: 1rem 1.5rem 1rem 1.2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            opacity: 0.97;
+            animation: fadeInMsg 0.5s;
+            position: relative;
+        }
+        .message-popup.success { border-left-color: #27ae60; color: #27ae60; }
+        .message-popup.error { border-left-color: #e74c3c; color: #e74c3c; }
+        .message-popup.info { border-left-color: #1976d2; color: #1976d2; }
+        .message-popup.warning { border-left-color: #ffc107; color: #b8860b; }
+        .message-popup .close-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        @keyframes fadeInMsg {
+            from { opacity: 0; transform: translateY(-20px);}
+            to { opacity: 0.97; transform: translateY(0);}
+        }
+        @media (max-width: 600px) {
+            .message-popup-container {
+                top: 10px;
+                right: 10px;
+            }
+            .message-popup {
+                min-width: 180px;
+                max-width: 95vw;
+                font-size: 0.97rem;
+                padding: 0.7rem 1rem 0.7rem 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
+
+    <!-- Django Messages Popup -->
+    <div class="message-popup-container" id="message-popup-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message-popup {{ message.tags }}">
+                    {% if message.tags == "success" %}
+                        <i class="fas fa-check-circle"></i>
+                    {% elif message.tags == "error" %}
+                        <i class="fas fa-times-circle"></i>
+                    {% elif message.tags == "warning" %}
+                        <i class="fas fa-exclamation-triangle"></i>
+                    {% else %}
+                        <i class="fas fa-info-circle"></i>
+                    {% endif %}
+                    <span>{{ message }}</span>
+                    <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
 
     <!-- Human Assistant Button -->
     <div class="assistant-container">
@@ -111,5 +190,15 @@
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/chatbot.js' %}"></script>
     {% block extra_js %}{% endblock %}
+    <script>
+        // Auto-hide message popups after 5 seconds
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                document.querySelectorAll('.message-popup').forEach(function(el) {
+                    el.style.display = 'none';
+                });
+            }, 5000);
+        });
+    </script>
 </body>
 </html>

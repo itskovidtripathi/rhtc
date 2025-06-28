@@ -1,0 +1,334 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        padding: 3rem 0;
+    }
+    .login-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 6px 32px rgba(7,42,203,0.10);
+        padding: 3.5rem 2.5rem 2.5rem 2.5rem;
+        width: 486px;
+        margin: 0 auto;
+        text-align: center;
+        animation: fadeIn 0.7s;
+        border: 1.5px solid #e3e6f0;
+        max-width: none;
+        min-width: 0;
+        box-sizing: border-box;
+        flex: none;
+    }
+    .login-card form,
+    .login-form {
+        width: 100%;
+    }
+    form {
+        max-width: none !important;
+        width: 100% !important;
+    }
+    .login-title {
+        color: #072ACB;
+        font-size: 2.2rem;
+        margin-bottom: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+    }
+    .login-title i {
+        color: #072ACB;
+        font-size: 2.2rem;
+    }
+    .login-message {
+        color: #1976d2;
+        font-size: 1.05rem;
+        margin-bottom: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 0.7rem 1rem;
+        font-weight: 500;
+    }
+    .login-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .form-group {
+        position: relative;
+        text-align: left;
+    }
+    .form-label {
+        color: #072ACB;
+        font-weight: 500;
+        margin-bottom: 0.3rem;
+        display: block;
+        font-size: 1.05rem;
+        letter-spacing: 0.5px;
+    }
+    .form-input {
+        width: 100%;
+        padding: 1rem 1.1rem;
+        border: 1.5px solid #e3e6f0;
+        border-radius: 10px;
+        font-size: 1.08rem;
+        background: #f8f9fa;
+        transition: border 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 2px rgba(7,42,203,0.03);
+    }
+    .form-input:focus {
+        border-color: #072ACB;
+        outline: none;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+    }
+    .form-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.2rem;
+        margin-bottom: 0.5rem;
+    }
+    .remember-me-label {
+        display: flex;
+        align-items: center;
+        font-size: 0.98rem;
+        color: #444;
+        gap: 0.5rem;
+        cursor: pointer;
+        user-select: none;
+    }
+    .remember-me-checkbox {
+        accent-color: #072ACB;
+        width: 1.1em;
+        height: 1.1em;
+        margin-right: 0.3em;
+    }
+    .forgot-link {
+        color: #072ACB;
+        text-decoration: none;
+        font-size: 0.98rem;
+        font-weight: 500;
+        transition: color 0.2s;
+    }
+    .forgot-link:hover {
+        color: #0520A0;
+        text-decoration: underline;
+    }
+    .login-btn {
+        background: #072ACB;
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 1rem 0;
+        font-size: 1.15rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        margin-top: 0.5rem;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+    }
+    .login-btn:hover {
+        background: #0520A0;
+        transform: translateY(-2px) scale(1.01);
+        box-shadow: 0 6px 18px rgba(7,42,203,0.13);
+    }
+    .login-links {
+        margin-top: 1.2rem;
+        font-size: 1rem;
+        color: #666;
+        text-align: center;
+    }
+    .login-links a {
+        color: #072ACB;
+        text-decoration: none;
+        margin-left: 0.5rem;
+        transition: color 0.2s;
+        font-weight: 500;
+    }
+    .login-links a:hover {
+        color: #0520A0;
+        text-decoration: underline;
+    }
+    .form-error {
+        color: #e74c3c;
+        font-size: 0.97rem;
+        margin-top: 0.2rem;
+        text-align: left;
+        min-height: 1.2em;
+    }
+    .toggle-password-btn {
+        position: absolute;
+        right: 1.2rem;
+        top: 58%;
+        transform: translateY(-50%);
+        background: none !important;
+        border: none;
+        color: #888;
+        font-size: 1rem;
+        cursor: pointer;
+        z-index: 2;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        min-height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: transparent !important;
+    }
+    .toggle-password-btn:focus {
+        outline: none;
+    }
+    .toggle-password-btn span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+        min-height: 22px;
+        line-height: 0;
+    }
+    .toggle-password-btn img {
+        width: 22px;
+        height: 22px;
+        display: block;
+        margin: 0;
+        padding: 0;
+        min-width: 22px;
+        min-height: 22px;
+        filter: grayscale(1) brightness(0.7);
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+    @media (max-width: 700px) {
+        .login-card {
+            width: 98vw;
+            max-width: 98vw;
+            padding: 2rem 0.5rem 1.5rem 0.5rem;
+        }
+        .login-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="login-section">
+    <div class="login-card">
+        <div class="login-title">
+            <i class="fas fa-user-circle"></i> Login
+        </div>
+        <!-- <div class="login-message">
+            Welcome back! Please login to access your personalized cancer support resources.
+        </div> -->
+        <form method="post" class="login-form" id="loginForm" novalidate>
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="mobile" class="form-label">Mobile Number</label>
+                <input type="tel" id="mobile" name="mobile" class="form-input" placeholder="Enter your mobile number" required pattern="[6-9][0-9]{9}">
+                <div class="form-error" id="mobileError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                <button type="button" class="toggle-password-btn" tabindex="-1" aria-label="Show/Hide Password" onclick="togglePassword('password', this)">
+                    <span id="toggle-password-icon">
+                        <img src="{% static 'images/visibility_24dp.png' %}" alt="Show password" />
+                    </span>
+                </button>
+                <div class="form-error" id="passwordError"></div>
+            </div>
+            <div class="form-row">
+                <label class="remember-me-label">
+                    <input type="checkbox" class="remember-me-checkbox" name="remember_me" id="remember_me">
+                    Remember me
+                </label>
+                <a href="#" class="forgot-link">Forgot password?</a>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+        <div class="login-links" style="margin-top: 1.2rem;">
+            Don't have an account?
+            <a href="{% url 'accounts:signup' %}">Sign Up</a>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    function togglePassword(inputId, btn) {
+        let ids = Array.isArray(inputId) ? inputId : [inputId];
+        let show = false;
+        ids.forEach(function(id) {
+            const input = document.getElementById(id);
+            if (input.type === "password") show = true;
+        });
+        ids.forEach(function(id) {
+            const input = document.getElementById(id);
+            input.type = show ? "text" : "password";
+        });
+        // Update icon
+        const icon = btn.querySelector('span');
+        if (show) {
+            icon.innerHTML = `<img src="{% static 'images/visibility_off_24dp.png' %}" alt="Hide password" />`;
+        } else {
+            icon.innerHTML = `<img src="{% static 'images/visibility_24dp.png' %}" alt="Show password" />`;
+        }
+    }
+
+    // Mobile validation
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        let valid = true;
+        // Mobile validation
+        const mobile = document.getElementById('mobile');
+        const mobileError = document.getElementById('mobileError');
+        if (!mobile.value.match(/^[6-9][0-9]{9}$/)) {
+            mobileError.textContent = "Enter a valid 10-digit mobile number starting with 6-9.";
+            valid = false;
+        } else {
+            mobileError.textContent = "";
+        }
+        // Password validation
+        const password = document.getElementById('password');
+        const passwordError = document.getElementById('passwordError');
+        if (!password.value) {
+            passwordError.textContent = "Password is required.";
+            valid = false;
+        } else {
+            passwordError.textContent = "";
+        }
+        if (!valid) e.preventDefault();
+    });
+
+    // Clear error on input change
+    document.getElementById('mobile').addEventListener('input', function() {
+        document.getElementById('mobileError').textContent = "";
+    });
+    document.getElementById('password').addEventListener('input', function() {
+        document.getElementById('passwordError').textContent = "";
+    });
+</script>
+{% endblock %}
+

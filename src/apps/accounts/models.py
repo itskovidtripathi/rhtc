@@ -1,3 +1,3 @@
 from django.db import models
 
-# Create your models here.
+# For custom user fields, create a Profile model linked to User if needed.
