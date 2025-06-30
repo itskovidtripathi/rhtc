@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from django.core.validators import validate_email
-from django.core.exceptions import ValidationError
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.conf import settings
 import re
 from .models import CareGiverProfile, UserRole
 
@@ -27,6 +27,7 @@ def is_valid_mobile(number):
     return re.fullmatch(r'[6-9]\d{9}', number) is not None
 
 def signup_view(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
     if request.method == "POST":
         full_name = request.POST.get("full_name", "").strip()
         whatsapp = request.POST.get("whatsapp", "").strip()
@@ -52,10 +53,14 @@ def signup_view(request):
                 user = User.objects.create_user(username=whatsapp, password=password, first_name=full_name)
                 UserRole.objects.create(user=user, role='patient')
                 login(request, user)
+                # Redirect to next if safe, else home
+                if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                    return redirect(next_url)
                 return redirect('core:home')
-    return render(request, 'accounts/signup.html')
+    return render(request, 'accounts/signup.html', {'next': next_url})
 
 def login_view(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
     if request.method == "POST":
         mobile = request.POST.get("mobile", "").strip()
         password = request.POST.get("password", "")
@@ -72,18 +77,22 @@ def login_view(request):
                     login(request, user)
                     if not remember_me:
                         request.session.set_expiry(0)
+                    # Redirect to next if safe, else home
+                    if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                        return redirect(next_url)
                     return redirect('core:home')
                 else:
                     messages.error(request, "You are not authorized to login as a patient.")
             else:
                 messages.error(request, "Invalid mobile number or password.")
-    return render(request, 'accounts/login.html')
+    return render(request, 'accounts/login.html', {'next': next_url})
 
 def logout_view(request):
     logout(request)
     return redirect('core:home')
 
 def caregiver_signup_view(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
     if request.method == "POST":
         full_name = request.POST.get("full_name", "").strip()
         whatsapp = request.POST.get("whatsapp", "").strip()
@@ -130,10 +139,14 @@ def caregiver_signup_view(request):
                 )
                 UserRole.objects.create(user=user, role='caregiver')
                 login(request, user)
+                # Redirect to next if safe, else caregiver detail
+                if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                    return redirect(next_url)
                 return redirect('human_interface:care_giver_detail', pk=caregiver_profile.pk)
-    return render(request, 'accounts/caregiver-signup.html')
+    return render(request, 'accounts/caregiver-signup.html', {'next': next_url})
 
 def caregiver_login_view(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
     if request.method == "POST":
         mobile = request.POST.get("mobile", "").strip()
         password = request.POST.get("password", "")
@@ -150,10 +163,13 @@ def caregiver_login_view(request):
                     login(request, user)
                     if not remember_me:
                         request.session.set_expiry(0)
+                    # Redirect to next if safe, else caregiver detail
+                    if next_url and url_has_allowed_host_and_scheme(next_url, allowed_hosts={request.get_host()}):
+                        return redirect(next_url)
                     return redirect('human_interface:care_giver_detail', pk=user.caregiver_profile.pk)
                 else:
                     messages.error(request, "You are not authorized to login as a caregiver.")
             else:
                 messages.error(request, "Invalid caregiver mobile number or password.")
-    return render(request, 'accounts/caregiver-login.html')
+    return render(request, 'accounts/caregiver-login.html', {'next': next_url})
 
