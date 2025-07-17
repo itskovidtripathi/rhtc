@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Care</title>
+    <link rel="icon" type="image/x-icon" href="{% static '/admin/img/chemotherapy.png' %}"> 
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function toggleDivVisibility() {
+            var div = document.getElementById("hiddableDiv");
+            if (div.style.display === "block") {
+                div.style.display = "none";
+                document.getElementById("dynamic-ico").innerHTML = "<i class='fa-solid fa-eye'></i> Show";
+            } else {
+                div.style.display = "block";
+                document.getElementById("dynamic-ico").innerHTML = "<i class='fa-solid fa-eye-slash'></i> Hide";
+            }
+        }
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            }  else { 
+                document.getElementById("coords_").innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            document.getElementById("coords_").innerHTML = "Coordinates: " + latitude +", "+ longitude;
+            document.getElementById("latitude").value = latitude;
+            document.getElementById("longitude").value = longitude;
+        }
+    </script>
+    <style>
+        /* TO SET MAP ON FULL SCREEN AND OVERFLOW HIDE */
+        
+        /* Reset */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* Allow scrolling for padding */
+        }
+
+        /* Try to override inline styles (fallback) */
+        div[style*="padding-bottom:60%"] {
+            padding-bottom: 200% !important;
+            height: 100vh !important;
+            width: 100vw !important;
+        }
+
+        /* Ensure iframe and Leaflet map fit */
+        iframe, .leaflet-container, .folium-map {
+            width: 100%;
+            height: 100vh;
+        }
+    </style>
+
+</head>
+<body onload="getLocation()">
+    {{ map | safe }}
+
+    <script>
+        // Fix padding-bottom and mobile height
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find the outer div with padding-bottom: 60%
+            const outerDiv = document.querySelector('div[style*="padding-bottom:60%"]');
+            if (outerDiv) {
+                outerDiv.style.paddingBottom = '200%';
+                outerDiv.style.height = window.innerHeight + 'px';
+                outerDiv.style.width = '100vw';
+            }
+
+            // Fix iframe height
+            const iframe = outerDiv ? outerDiv.querySelector('iframe') : null;
+            if (iframe) {
+                iframe.style.height = window.innerHeight + 'px';
+            }
+
+            // Fix map div height
+            const foliumMap = document.querySelector('.folium-map');
+            if (foliumMap) {
+                foliumMap.style.height = window.innerHeight + 'px';
+            }
+        });
+
+        // Update on resize
+        window.addEventListener('resize', function() {
+            const outerDiv = document.querySelector('div[style*="padding-bottom"]');
+            if (outerDiv) {
+                outerDiv.style.height = window.innerHeight + 'px';
+            }
+            const iframe = outerDiv ? outerDiv.querySelector('iframe') : null;
+            if (iframe) {
+                iframe.style.height = window.innerHeight + 'px';
+            }
+            const foliumMap = document.querySelector('.folium-map');
+            if (foliumMap) {
+                foliumMap.style.height = window.innerHeight + 'px';
+            }
+        });
+    </script>
+
+    <!-- hide and show side pane -->
+    {% block toggleButton %}
+    {% endblock %}
+    
+    <!-- error block -->
+    {% for message in messages %}
+        <div role="alert" style="width: 100%; position: absolute; font-weight: 200; font-size: 20px; text-align: center; margin-top: 20px;">
+            <a class="close" href="#" data-dismiss="alert" style="color: red;"> {{ message }}</a>
+        </div>
+    {% endfor %}
+
+    <!-- content -->
+    {% block container %}
+    {% endblock %}
+</body>
+</html>

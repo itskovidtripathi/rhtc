@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login As - RHTC{% endblock %}
+
+{% block extra_css %}
+<style>
+    .login-as-section {
+        min-height: 70vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f8f9fa;
+        padding: 3rem 0;
+    }
+    .login-as-cards {
+        display: flex;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: stretch;
+        width: 100%;
+        max-width: 900px;
+    }
+    .login-as-card {
+        background: #fff;
+        border-radius: 22px;
+        box-shadow: 0 8px 36px rgba(7,42,203,0.13), 0 1.5px 8px rgba(7,42,203,0.06);
+        padding: 2.5rem 2.5rem 2rem 2.5rem;
+        width: 340px;
+        min-width: 260px;
+        max-width: 98vw;
+        margin: 0 auto;
+        text-align: center;
+        border: 1.5px solid #e3e6f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        animation: fadeIn 0.7s;
+        position: relative;
+        overflow: hidden;
+    }
+    .login-as-icon {
+        font-size: 2.8rem;
+        color: #072ACB;
+        margin-bottom: 1.2rem;
+    }
+    .login-as-title {
+        color: #072ACB;
+        font-size: 1.35rem;
+        font-weight: 700;
+        margin-bottom: 0.7rem;
+        letter-spacing: 0.5px;
+    }
+    .login-as-desc {
+        color: #444;
+        font-size: 1.03rem;
+        margin-bottom: 1.5rem;
+        min-height: 2.5em;
+    }
+    .login-as-btn {
+        background: linear-gradient(90deg, #072ACB 60%, #1976d2 100%);
+        color: white;
+        border: none;
+        border-radius: 50px;
+        padding: 0.9rem 0;
+        font-size: 1.13rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+        width: 100%;
+        box-shadow: 0 2px 8px rgba(7,42,203,0.07);
+        letter-spacing: 0.5px;
+        margin-top: auto;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+    }
+    .login-as-btn:hover {
+        background: linear-gradient(90deg, #0520A0 60%, #1976d2 100%);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(7,42,203,0.18);
+        color: #fff;
+        text-decoration: none;
+    }
+    @media (max-width: 800px) {
+        .login-as-cards {
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+        .login-as-card {
+            width: 98vw;
+            max-width: 400px;
+            padding: 1.5rem 0.7rem 1.2rem 0.7rem;
+        }
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px);}
+        to { opacity: 1; transform: translateY(0);}
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="login-as-section">
+    <div class="login-as-cards">
+        <div class="login-as-card">
+            <div class="login-as-icon">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="login-as-title">Login as Patient</div>
+            <div class="login-as-desc">
+                Access your patient dashboard, appointments, and resources.
+            </div>
+            <a href="{% url 'accounts:login' %}" class="login-as-btn">
+                <i class="fas fa-sign-in-alt"></i> Patient Login
+            </a>
+        </div>
+        <div class="login-as-card">
+            <div class="login-as-icon">
+                <i class="fas fa-user-md"></i>
+            </div>
+            <div class="login-as-title">Login as Caregiver</div>
+            <div class="login-as-desc">
+                Manage your caregiver profile, appointments, and patient support.
+            </div>
+            <a href="{% url 'accounts:caregiver_login' %}" class="login-as-btn">
+                <i class="fas fa-sign-in-alt"></i> Caregiver Login
+            </a>
+        </div>
+    </div>
+</main>
+{% endblock %}

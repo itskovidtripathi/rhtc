@@ -1,0 +1,138 @@
+{% extends 'cancer-center/base2.html' %}
+
+{% block toggleButton %}
+
+<button id="dynamic-ico" onclick="toggleDivVisibility()" style="border: none; padding: 8px 15px; border-radius: 20px;
+    font-size: 14px; cursor: pointer; background-color: #525252; 
+    color: white; position: absolute; z-index: 1; top: 30px; left: 50px">
+    <i class='fa-solid fa-eye-slash'></i> Hide
+</button>
+
+{% endblock %}
+
+{% block container %}
+
+{% if n_hospital %}
+<div class="right-content">
+    <h1>It's near by you</h1></br>
+    <div class="right-content-inner">
+        <p>We are here to help you find the best cancer care center near you.</p>
+
+        <!-- Nearest Hospital Details -->
+        <div class="hospital-details">
+            <h2>{{ n_hospital }}</h2>
+            <p class="orgs-type">{{ n_center }}</p>
+            <div class="hospital-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-x-ray"></i>
+                    <span>{{ n_dc }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+                    <span>{{ n_bloodb }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa fa-user-md"></i>
+                    <span>{{ n_pc }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-microscope"></i>
+                    <span>{{ n_path }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Policy Accepted: {{ n_hp }}</span>
+                </div>
+            </div>
+            <p><strong>Phone/tel:</strong> {{ n_phone_tel }}</p>
+            <p><strong>Website:</strong> <a href="{{ n_website }}">{{ n_website }}</a></p>
+            <p><strong>Region:</strong> {{ n_city }}, {{ n_region}}, {{ n_country }}</p>
+        </div>
+        <p style="font-size: 16px; color: rgb(255, 94, 94);">{{ distance }}</p>
+        <div class="action-buttons">
+            <a class="track-btn" href="{{ g_link }}">Track Location On Google Map</a>
+            
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<!-- left content -->
+<div class="container" id="hiddableDiv">
+    <!-- Header -->
+    <header style="flex-direction: row; justify-content: stretch; align-items: center; gap: 8px;">
+
+    </header>
+
+
+    <!-- Form Section -->
+    <div class="form-section">
+
+        <form method="post" id="myForm">
+            {% csrf_token %}
+            <input type="hidden" id="latitude" name="latitude">
+            <input type="hidden" id="longitude" name="longitude">
+            <div class="form-group">
+                <input type="text" placeholder="Enter Your Location" class="form-input" id="location" name="location">
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Site of Cancer" name="cancerType" id="cancerType" class="form-input"
+                    required>
+            </div>
+            <div class="action-buttons">
+                <input type="submit" class="find-btn" value="Find Nearest Hospital">
+            </div>
+        </form>
+
+        {% for item in cdata %}
+
+        <!-- Hospital Details -->
+        <div class="hospital-details">
+            <h2>{{ item.hospital }}</h2>
+            <p class="orgs-type">{{ item.center }}</p>
+            <div class="hospital-info">
+                <div class="info-item">
+                    <i class="fa-solid fa-x-ray"></i>
+                    <span>{{ item.diagnosis_center }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-hand-holding-droplet"></i>
+                    <span>{{ item.blood_bank }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa fa-user-md"></i>
+                    <span>{{ item.palliative_care }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fa-solid fa-microscope"></i>
+                    <span>{{ item.pathology }}</span>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Policy Accepted: {{ item.hospital_policy }}</span>
+                </div>
+            </div>
+            <p><strong>Phone/tel:</strong> {{ item.phone_tel }}</p>
+            <p><strong>Website:</strong> <a href="{{ item.website }}">{{ item.website }}</a></p>
+            <p><strong>Region:</strong> {{ item.city }}, {{ item.region}}, {{ item.country }}</p>
+        </div>
+        {% endfor %}
+
+        <!-- Coordinates -->
+        <p id="coords_" class="coordinates">Loading.....</p>
+    </div>
+</div>
+
+<script>
+    function toggleSpecialistDiv() {
+        var div = document.getElementById("SpecialistDiv");
+        if (div.style.display === "block") {
+            div.style.display = "none";
+        } else {
+            div.style.display = "block";
+        }
+    }
+</script>
+
+{% endblock %}
